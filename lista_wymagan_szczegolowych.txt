@@ -1,0 +1,17 @@
+1. Najwa¿niejsze:
+1) System umo¿liwia rejestracjê - Funkcjonalne
+2) Udostêpnia panel logowania - Funkcjonalne
+3) Wyszukiwanie ksi¹¿ek po tytule, autorze, roku wydania - Funkcjonalne
+4) Wybór ksi¹¿ek do wypo¿yczenia - Funkcjonalne
+5) Wypo¿yczenie wybranych ksi¹¿ek - Funkcjonalne
+
+2. Mniej wa¿ne:
+1) Weryfikacja adresu e-mail po rejestracji - Funkcjonalne
+2) Sortowanie ksi¹¿ek po kategoriach - Funkcjonalne
+3) Mo¿liwoœæ rezerwacji ksi¹¿ek - Funkcjonalne
+4) Anulowanie rezerwacji - Funkcjonalne
+
+3. Najmniej wa¿ne:
+1) Logowanie przez e-mail i has³o - Nie funkcjonalne
+2) Mo¿liwoœæ przegl¹dania ksi¹¿ek bez logowania - Nie funkcjonalne
+3) Powiadomienie o dostêpnoœci ksi¹¿ki - - Funkcjonalne

@@ -1,0 +1,10 @@
+aplikacja webowa
+konta u¿ytkowników
+weryfikacja e-mail
+baza ksi¹¿ek
+front
+powiadomienia e-mail
+wyszukiwarka ksi¹¿ek
+grupowanie ksi¹¿ek
+powiadomienie o dostêpnoœci ksi¹¿ki
+przegl¹danie bez logowania
