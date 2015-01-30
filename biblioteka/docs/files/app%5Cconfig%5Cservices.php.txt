@@ -130,12 +130,6 @@ $di->set('mail', function(){
     return new PHPMailer();
 });
 
-$di->set('conf', function() {
-    return	array(
-        "index_limit"=>3,
-        "news_limit"=>3
-    );
-});
 
 
 $di->set('dispatcher', function() use ($di) {
@@ -168,18 +162,6 @@ $di->set('dispatcher', function() use ($di) {
     },
     true
 );
-
-
-
-$di->set('router', function() {
-    $router = new Router();
-
-    return $router;
-});
-
-$di->set('elements', function(){
-    return new Elements();
-});
 
 $di->set('flash', function(){
     $flash = new \Phalcon\Flash\Direct(

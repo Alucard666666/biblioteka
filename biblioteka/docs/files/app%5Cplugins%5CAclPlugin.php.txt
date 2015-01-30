@@ -49,8 +49,9 @@ class AclPlugin extends Plugin
                 'error' => array('show401','show404', 'show500'),
                 'login' => array('index'),
                 'register' => array('index', 'confirm'),
-                'categories' => array('index', 'show'),
+                'categories' => array('index', 'show', 'getBooks'),
                 'users' => array('index', 'login'),
+                'books' => array('index', 'detail'),
             );
             foreach ($publicResources as $resource => $actions) {
                 $acl->addResource(new Resource($resource), $actions);

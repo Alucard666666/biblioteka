@@ -23,7 +23,7 @@ return new \Phalcon\Config(array(
         'system_version' => '1.0.0-dev'
     ),
     'email' => array(
-        'emailFrom' => 'no-reply@groundfunding.nl',
+        'emailFrom' => 'localhost@biblioteka.pl',
         'emailName' => 'no-reply'
     )
 ));

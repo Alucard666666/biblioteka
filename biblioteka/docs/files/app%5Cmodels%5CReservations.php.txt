@@ -13,7 +13,7 @@ class Reservations extends \Phalcon\Mvc\Model
      *
      * @var integer
      */
-    public $reservation_user_id;
+    public $reservation_book_id;
 
     /**
      *
@@ -40,7 +40,7 @@ class Reservations extends \Phalcon\Mvc\Model
     {
         return array(
             'reservation_id' => 'reservation_id', 
-            'reservation_user_id' => 'reservation_user_id', 
+            'reservation_book_id' => 'reservation_book_id',
             'reservation_start' => 'reservation_start', 
             'reservation_end' => 'reservation_end', 
             'reservation_status' => 'reservation_status'

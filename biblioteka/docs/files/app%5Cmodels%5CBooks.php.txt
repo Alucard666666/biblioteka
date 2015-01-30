@@ -40,6 +40,12 @@ class Books extends \Phalcon\Mvc\Model
     public $book_description;
 
     /**
+     *
+     * @var string
+     */
+    public $book_link;
+
+    /**
      * Independent Column Mapping.
      */
     public function columnMap()
@@ -50,8 +56,21 @@ class Books extends \Phalcon\Mvc\Model
             'book_title' => 'book_title', 
             'book_author' => 'book_author', 
             'book_year' => 'book_year', 
-            'book_description' => 'book_description'
+            'book_description' => 'book_description',
+            'book_link' => 'book_link'
         );
+    }
+
+
+    /**
+     * Short Description.
+     */
+    public function getShortDescription()
+    {
+        if(strlen($this->book_description)>40)
+            return  substr($this->book_description,0,40).'...';
+        else
+            return $this->book_description;
     }
 
 }

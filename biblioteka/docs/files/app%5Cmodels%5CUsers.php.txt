@@ -19,6 +19,12 @@ class Users extends \Phalcon\Mvc\Model
      *
      * @var string
      */
+    public $user_password;
+
+    /**
+     *
+     * @var string
+     */
     public $user_token;
 
     /**
@@ -47,7 +53,8 @@ class Users extends \Phalcon\Mvc\Model
         return array(
             'user_id' => 'user_id', 
             'user_email' => 'user_email', 
-            'user_token' => 'user_token', 
+            'user_password' => 'user_password',
+            'user_token' => 'user_token',
             'user_status' => 'user_status', 
             'user_registerdate' => 'user_registerdate', 
             'user_validdate' => 'user_validdate'
