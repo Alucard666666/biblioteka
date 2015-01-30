@@ -1,0 +1,35 @@
+<?php
+
+class LoginController extends ControllerBase
+{
+    public function indexAction()
+    {
+        if($this->session->has("user"))
+            return $this->response->redirect("users");
+
+        if ($this->request->isPost() && $this->dispatcher->getParam(0)!="register") {
+            $user = Users::findFirst(
+                array(
+                    "user_email = :email: AND user_password = :password: AND user_active = 1",
+                    "bind" => array('email' => $this->request->getPost('email'), 'password' => $this->request->getPost('password'))
+                )
+            );
+
+            if ($user == true) {
+                $this->registerSession($user);
+                return $this->response->redirect();
+            } else {
+                $this->flash->error("Wrong data");
+            }
+        }
+    }
+
+    private function registerSession($user)
+    {
+        $this->session->set('user', array(
+            'user_id' => $user->user_id,
+            'user_email' => $user->user_email
+        ));
+    }
+}
+

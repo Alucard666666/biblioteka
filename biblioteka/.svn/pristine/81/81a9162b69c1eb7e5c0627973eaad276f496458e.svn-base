@@ -1,0 +1,14 @@
+{{ getTitle() }}
+
+{{ stylesheet_link("bootstrap/css/bootstrap.css") }}
+{{ stylesheet_link("css/style.css") }}
+{{ stylesheet_link("css/bootstrap-datetimepicker.min.css") }}
+
+{{ javascript_include("js/jquery-1.11.0.min.js") }}
+{{ javascript_include("js/jquery-ui.js") }}
+{{ javascript_include("bootstrap/js/bootstrap.min.js") }}
+{{ javascript_include("js/jquery.scripts.js") }}
+{{ javascript_include("js/script.js") }}
+{{ javascript_include("js/moment.js") }}
+{{ javascript_include("js/bootstrap-datetimepicker.js") }}
+{{ javascript_include("js/jquery.inputmask.js") }}

@@ -1,0 +1,4 @@
+<ul class="nav nav-tabs">
+    <li<?php if ($this->router->getActionName() == null || $this->router->getActionName() == 'index') { ?> class="active"<?php } ?>><?php echo $this->tag->linkto(array('users', 'My transacties')); ?></li>
+    <li<?php if ($this->router->getActionName() == 'profile') { ?> class="active"<?php } ?>><?php echo $this->tag->linkto(array('users/profile', 'Profile')); ?></li>
+</ul>

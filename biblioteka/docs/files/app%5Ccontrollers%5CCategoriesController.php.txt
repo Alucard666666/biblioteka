@@ -1,0 +1,17 @@
+<?php
+
+class CategoriesController extends ControllerBase
+{
+    public function showAction()
+    {
+
+    }
+
+    public function getAction()
+    {
+        $this->view->books = books::find(array(
+            "conditions" => "book_category_id='".$this->router->getParams()[0]."'"
+        ));
+    }
+}
+

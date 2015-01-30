@@ -1,0 +1,62 @@
+<?php
+
+use Phalcon\Paginator\Adapter\Model as Paginator;
+
+class IndexController extends ControllerBase
+{
+
+    public function initialize(){
+
+        parent::initialize();
+    }
+
+    public function indexAction(){
+        $this->dispatcher->forward(
+            array(
+                "controller" => "index",
+                "action" => "page",
+                "param" => "1"
+            )
+        );
+    }
+
+    public function pageAction()
+	{
+        $currentPage = (int) $this->dispatcher->getParam(0) > 1 ? (int) $this->dispatcher->getParam(0) : 1 ;
+
+        $projects = Projects::find();
+
+        $paginator = new Paginator(array(
+            "data" => $projects,
+            "limit"=> $this->conf['index_limit'],
+            "page" => $currentPage
+        ));
+
+        $this->view->projects = $paginator->getPaginate();
+	}
+
+	public function detailAction()
+	{
+		$this->view->setLayout('main2');
+
+		$project = Projects::findFirst(
+            array(
+			    "project_link = :link:",
+			    "bind" => array('link' => $this->dispatcher->getParam("link"))
+		    )
+        );
+
+		if ($project == true) {
+
+            $project->transactions = Transactions::find(
+                array(
+                    "transaction_project_id = :project_id:",
+                    "bind" => array('project_id' => $project->project_id)
+                )
+            );
+
+            $this->view->project = $project;
+		}
+	}
+}
+

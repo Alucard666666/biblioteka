@@ -1,0 +1,34 @@
+<?php
+
+use Phalcon\Mvc\Controller;
+
+class ControllerBase extends Controller
+{
+	public function initialize()
+	{
+        $this->tag->setTitle("Groundfunding.nl");
+
+		$newsList = News::find(
+            array(
+                "limit" => 5,
+                "order" => "news_date DESC"
+            )
+        );
+
+        $this->view->newsList = $newsList;
+
+		$this->view->transactions_amount = Elements::formatCurrency(Transactions::sum(
+            array(
+			    "column" => "transaction_amount"
+		    )
+        ));
+
+        $this->view->transactions_amount_avg = Elements::formatCurrency(Transactions::average(
+            array(
+                "column" => "transaction_amount"
+            )
+        ));
+
+        $this->view->total_projects = Projects::count();
+	}
+}

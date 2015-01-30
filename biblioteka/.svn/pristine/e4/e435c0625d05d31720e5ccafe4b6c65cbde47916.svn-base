@@ -1,0 +1,19 @@
+<table class="table table-striped">
+	<colgroup>
+		<col style="width: 10%;">
+		<col>
+		<col style="width: 15%;">
+	</colgroup>
+	<thead>
+		<th>#</th>
+		<th>Document</th>
+		<th>Date added</th>
+	</thead>
+	<tbody>
+	<tr>
+		<td>a</td>
+		<td>b</td>
+		<td>{{ link_to("downloads/example.pdf", "Download") }}</td>
+	</tr>
+	</tbody>
+</table>

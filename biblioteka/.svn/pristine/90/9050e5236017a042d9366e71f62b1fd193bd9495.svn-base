@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>GroundFunding</title>
+	<link href="/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen"/>
+    <?php echo $this->tag->javascriptInclude('js/jquery-1.11.0.min.js'); ?>
+    <?php echo $this->tag->javascriptInclude('bootstrap/js/bootstrap.min.js'); ?>
+    <?php echo $this->tag->javascriptInclude('js/jquery.scripts.js'); ?>
+	<style>
+		.list-unstyled li a{
+			color: #A19F9F !important;
+		}
+	</style>
+</head>
+<body>
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+			<?php echo $this->tag->linkTo(array('', $this->tag->image(array('img/logo.png', 'alt' => 'Logo', 'style' => 'padding-top: 30px; padding-bottom: 30px;')))); ?>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-3 text-center">
+			<div style="background-color: grey; padding: 7px; -webkit-border-top-left-radius: 10px; -webkit-border-top-right-radius: 10px;-moz-border-radius-topleft: 10px;-moz-border-radius-topright: 10px; border-top-left-radius: 10px;	border-top-right-radius: 10px;"><h4 style="color: #fff;">ik bouw vermogen op</h4></div>
+		</div>
+		<div class="col-lg-7 col-lg-offset-2 text-right" style="padding-top: 20px;">
+            <?php echo $this->tag->linkTo(array('#', 'IK BEN GEINTERESSEERD IN EEN BELEGGING')); ?> | <?php echo $this->tag->linkTo(array('downloads', 'DOWNLOADS')); ?> | <?php echo $this->tag->linkTo(array('#', 'ALGEMENE')); ?>
+		</div>
+		<div class="col-lg-12">
+			<hr style="padding-top: 0; margin-top: 0;"/>
+		</div>
+
+	</div>
+
+	<div class="row">
+		<div class="col-lg-8">
+			<?php echo $this->getContent(); ?>
+		</div>
+		<div class="col-lg-4">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title"><strong>Kunnen wij u helpen?</strong></h3>
+				</div>
+				<div class="panel-body">
+					<div class="media">
+						<span class="pull-left">
+
+							<?php echo $this->tag->image(array('http://marketingecomunicazione.it/public_html/images/call_center.jpg', 'alt' => 'banner', 'style' => 'max-width: 50px;', 'class' => 'media-object img-circle img-responsive')); ?>
+
+						</span>
+						<div class="media-body" style="padding-top: 8px; padding-left: 20px;">
+                            <?php echo $this->tag->linkTo(array('contact', 'Stel hier uw vraag aan Astrid <i class="glyphicon glyphicon-play"></i>', 'class' => 'btn btn-default')); ?>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title"><strong>Transacties</strong></h3>
+				</div>
+				<div class="panel-body">
+
+						<?php
+
+						foreach($rows AS $data){
+
+						?>
+
+					<div class="media">
+						<span class="pull-left">
+
+							<?php echo $this->tag->image(array("http://icons.iconarchive.com/icons/artua/dragon-soft/512/User-icon.png", "alt" => "...", "style"=>"max-width: 50px;", "class"=>"media-object img-responsive")); ?>
+
+						</span>
+						<div class="media-body" style="padding-top: 8px; padding-left: 20px;">
+
+							<p><?php echo $data['user_email'] ?></p>
+							<h5><strong>Amount: <span  class="text-danger">&euro; <?php echo $data['transaction_amount'] ?></span></strong></h5>
+
+						</div>
+					</div>
+					<hr />
+
+
+					<?php } ?>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<div class="navbar-static-bottom">
+	<div class="container">
+		<div class="col-lg-12" style="background-color: #EBEBEB;">
+			<div class="pull-left" style="width: 20%; padding: 10px;">
+
+				<h5><strong>Over Element Kapitaal</strong></h5>
+				<ul style="padding-top: 15px;" class="list-unstyled">
+					<li><?php echo $this->tag->linkTo(array('page-strategie', 'Strategie')); ?></li>
+					<li><?php echo $this->tag->linkTo(array('page-strategie', 'Strategie')); ?></li>
+					<li><?php echo $this->tag->linkTo(array('page-corporate', 'Corporate')); ?></li>
+					<li><?php echo $this->tag->linkTo(array('page-klachtenprocedure', 'Klachtenprocedure')); ?></li>
+				</ul>
+			</div>
+			<div class="pull-left" style="width: 20%; padding: 10px;">
+				<h5><strong>Documenten</strong></h5>
+				<ul style="padding-top: 15px;" class="list-unstyled">
+					<li><?php echo $this->tag->linkTo(array('page-algemene-voorwaarden', 'Algemene voorwaarden')); ?></li>
+					<li><?php echo $this->tag->linkTo(array('page-informatiebrochure', 'Informatiebrochure')); ?></li>
+					<li><?php echo $this->tag->linkTo(array('page-veel-gestelde-vragen', 'Veel gestelde vragen')); ?></li>
+				</ul>
+			</div>
+			<div class="pull-left" style="width: 20%; padding: 10px;">
+				<h5><strong>Contact & service</strong></h5>
+				<ul style="padding-top: 15px;" class="list-unstyled">
+					<li><?php echo $this->tag->linkTo(array('http://duokoop.nl', 'Duokoop')); ?></li>
+					<li><?php echo $this->tag->linkTo(array('Contact', 'Contact')); ?></li>
+				</ul>
+			</div>
+			<div class="pull-left" style="width: 20%; padding: 10px;">
+				<h5><strong>Over deze website</strong></h5>
+				<ul style="padding-top: 15px;" class="list-unstyled">
+
+					<li><?php echo $this->tag->linkTo(array('login', 'Login')); ?></li>
+					<li><?php echo $this->tag->linkTo(array('page-privacy-statement', 'Privacy statement')); ?></li>
+					<li><?php echo $this->tag->linkTo(array('page-disclaimer', 'Disclaimer')); ?></li>
+					<li><?php echo $this->tag->linkTo(array('page-cookies', 'Cookies')); ?></li>
+				</ul>
+			</div>
+			<div class="pull-left" style="width: 20%; padding: 10px;">
+				<h5><strong>Over deze website</strong></h5>
+				<ul style="padding-top: 15px;" class="list-unstyled">
+
+					<li><?php echo $this->tag->linkTo(array('news', 'Nieuws')); ?></li>
+					<li><?php echo $this->tag->linkTo(array('page-uit-de-pers', 'Uit de pers')); ?></li>
+					<li><?php echo $this->tag->linkTo(array('page-nieuwsbrieven', 'Nieuwsbrieven')); ?></li>
+				</ul>
+			</div>
+
+	   	</div>
+	   	<div class="row" >
+	   		<div class="col-lg-6" style="margin-top: 15px;">
+				<strong>Copyright 2012 - alle rechten voorbehouden</strong>
+			</div>
+			<div class="col-lg-6 text-right" style="margin-top: 15px;">
+				social media
+			</div>
+		</div>
+  	</div>
+</div>
+
+
+</body>
+</html>

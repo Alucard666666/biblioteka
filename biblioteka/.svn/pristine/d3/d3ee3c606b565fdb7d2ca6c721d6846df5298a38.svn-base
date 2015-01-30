@@ -1,0 +1,11 @@
+.btn-navigation-top{
+    width: 100%;
+    height: 100%;
+    display: block;
+    color: #fff;
+    text-decoration: none;
+}
+
+.list-unstyled li a{
+    color: #A19F9F !important;
+}

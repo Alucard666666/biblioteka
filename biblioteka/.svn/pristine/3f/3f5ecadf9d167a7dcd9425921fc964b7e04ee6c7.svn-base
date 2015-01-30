@@ -1,0 +1,61 @@
+<?php
+
+use Phalcon\Validation;
+use Phalcon\Validation\Validator;
+use Phalcon\Validation\Validator\PresenceOf,
+    Phalcon\Validation\Validator\Email,
+    Phalcon\Validation\Validator\Regex as RegexValidator;
+use Phalcon\Validation\Validator\StringLength  as StringLength;
+use Phalcon\Validation\Validator\Confirmation;
+
+class MyValidation extends Validation
+{
+    public function initialize()
+    {
+        $this->add('user_name', new PresenceOf(array(
+            'message' => 'tussenvoegsel is required'
+        )));
+
+        $this->add('user_name',new StringLength(array(
+            'min' => 5,
+            'messageMinimum' => 'We want more than just their initials'
+        )));
+
+        $this->add('user_email', new Email(array(
+            'message' => 'e-mail is not valid'
+        )));
+
+        $this->add('user_password',new StringLength(array(
+            'min' => 8,
+            'messageMinimum' => 'We want more than just their initials'
+        )));
+
+        $this->add('confirm_password', new Confirmation(array(
+            'message' => 'Password doesn\'t match confirmation',
+            'with' => 'user_password'
+        )));
+
+        $this->add('user_street', new PresenceOf(array(
+            'message' => 'straat is required'
+        )));
+
+        $this->add('user_postcode', new RegexValidator(array(
+            'pattern' => '/^[\d]{4}[\s]?[a-zA-Z]{2}+$/',
+            'message' => 'Incorrent postcode'
+        )));
+
+        $this->add('user_house', new RegexValidator(array(
+            'pattern' => '/^[\d]+[a-zA-Z]?+$/',
+            'message' => 'nr is required'
+        )));
+
+        $this->add('user_city', new PresenceOf(array(
+            'message' => 'plaats is required'
+        )));
+
+        $this->add('user_phone', new RegexValidator(array(
+            'pattern' => '/^\+?[\d -]+$/',
+            'message' => 'telefoonnummer is required'
+        )));
+    }
+}

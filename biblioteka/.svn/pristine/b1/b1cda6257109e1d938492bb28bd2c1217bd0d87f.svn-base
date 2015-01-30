@@ -1,0 +1,29 @@
+<?php
+
+class Gifts extends \Phalcon\Mvc\Model
+{
+
+    /**
+     *
+     * @var integer
+     */
+    public $gift_id;
+
+    /**
+     *
+     * @var integer
+     */
+    public $gift_project_id;
+
+    /**
+     *
+     * @var integer
+     */
+    public $gift_amount;
+
+    /**
+     *
+     * @var string
+     */
+    public $gift_description;
+}

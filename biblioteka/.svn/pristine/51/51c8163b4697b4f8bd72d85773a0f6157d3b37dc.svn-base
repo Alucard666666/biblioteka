@@ -1,0 +1,122 @@
+<?php
+
+use Phalcon\Validation\Validator\PresenceOf,
+	Phalcon\Validation\Validator\Email,
+	Phalcon\Validation\Validator\Regex as RegexValidator;
+
+class ContactController extends ControllerBase
+{
+    public function indexAction()
+    {
+        if($this->request->isPost() == true && $this->dispatcher->getParam(0)!="sent"){
+            if($this->validateForm()){
+                return $this->dispatcher->forward(array(
+                    "controller" => "contact",
+                    "action" => "send"
+                ));
+            }
+        }
+    }
+
+	private function validateForm()
+	{
+		$validation = new Phalcon\Validation();
+
+		$validation->add('user_name', new PresenceOf(array(
+			'message' => 'tussenvoegsel is required'
+		)));
+
+        if($this->request->getPost("user_postcode")!=NULL){
+            $validation->add('user_postcode', new RegexValidator(array(
+                'pattern' => '/^[\d]{4}[\s]?[a-zA-Z]{2}+$/',
+                'message' => 'Incorrent postcode'
+            )));
+        }
+
+        if($this->request->getPost("user_house")!=NULL) {
+            $validation->add('user_house', new RegexValidator(array(
+                'pattern' => '/^[\d]+[a-zA-Z]?+$/',
+                'message' => 'nr is required'
+            )));
+        }
+
+        if($this->request->getPost("user_city")!=NULL) {
+            $validation->add('user_city', new PresenceOf(array(
+                'message' => 'plaats is required'
+            )));
+        }
+
+        if($this->request->getPost("user_city")!=NULL) {
+            $validation->add('user_city', new RegexValidator(array(
+                'pattern' => '/^\+?[\d -]+$/',
+                'message' => 'telefoonnummer is required'
+            )));
+        }
+
+		$validation->add('user_email', new Email(array(
+			'message' => 'e-mail is not valid'
+		)));
+
+		$validation->add('message', new PresenceOf(array(
+			'message' => 'message is required'
+		)));
+
+        $messages = $validation->validate($_POST);
+
+        if ($messages->count()) {
+			foreach ($messages as $message)
+                $error[$message->getField()] = $message->getMessage();
+
+			$this->view->error = $error;
+
+            $this->flash->error("Please fill all fields");
+
+            return false;
+		}
+
+        return true;
+	}
+
+    public function sendAction(){
+
+        $mail = new PHPMailer();
+
+        $mail->SetFrom($this->request->getPost('user_email'),  $this->request->getPost('user_name'));
+
+        $mail->AddAddress($this->email['emailFrom'], $this->email['emailName']);
+
+        $mail->Subject = "Email From groundfunding.nl";
+        $mail->AltBody = "To view the message, please use an HTML compatible email viewer!";
+
+        $body = "
+            <b>Name</b>: ".	$this->request->getPost('user_name')." ".	$this->request->getPost('voorletters')." ".	$this->request->getPost('achternaam')."<br />
+            <b>Street</b>: ".$this->request->getPost('straat')." ".$this->request->getPost('nr')."<br />
+            <b>Postcode/City</b>: ".$this->request->getPost('postcode')." ".$this->request->getPost('plaats')."<br />
+            <b>Phone</b>: ".$this->request->getPost('telefoonnummer')."<br />
+            <b>Email</b>: ".$this->request->getPost('user_email')."<br />
+            <b>Roden</b>: ".$this->request->getPost('reden')."<br />
+            <b>Text</b>: ".$this->request->getPost('text')."
+        ";
+
+        $mail->MsgHTML($body);
+
+        if($mail->send()){
+            $this->flash->success("Your message has been sent");
+            unset($_POST);
+            return $this->dispatcher->forward(array(
+                "controller" => "contact",
+                "action" => "index",
+                "params" => array(0=>"sent")
+            ));
+        } else {
+            $this->flash->error($mail->ErrorInfo);
+        }
+    }
+
+
+}
+
+
+
+
+

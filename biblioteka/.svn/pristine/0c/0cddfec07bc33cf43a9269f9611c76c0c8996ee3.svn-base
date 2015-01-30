@@ -1,0 +1,52 @@
+<?php
+
+class TransactionController extends ControllerBase
+{
+	public function indexAction()
+	{
+
+		$transactions = new Transactions();
+		$projects = new Projects();
+
+		$user = $this->session->get("auth");
+
+		$transactionsList = $transactions :: find(array(
+            "transaction_user_id=".$user['user_id'],
+            "group" => "transaction_project_id"
+        ));
+
+		$string_limit = 200;
+
+		foreach($transactionsList AS $key=>$val){
+
+			$data->total = $transactions->sum(array(
+				"column" => "transaction_amount",
+				"conditions" => "transaction_project_id = '".$val->transaction_project_id."'"
+			));
+
+			$data->total = $data->total!= "" ? $data->total : 0;
+
+			$project = $projects :: findFirst(array(
+				"projekt_id = :projekt_id:",
+				"bind" => array('projekt_id' => $val->transaction_project_id)
+			))->toArray();
+
+			$row[$key] = $transactionsList[$key]->toArray();
+
+			$data->percent = round(($data->total/$project['projekt_price']) * 100, 0);
+
+			$project['projekt_percent'] = $data->percent;
+
+			$project['projekt_description'] = strlen($project['projekt_description']) > $string_limit ? substr($project['projekt_description'], 0, $string_limit)."..." : $project['projekt_description'];
+
+			$row[$key]['project'] = $project;
+
+		}
+
+		$this->view->setVar("rows", $row);
+
+	}
+}
+
+
+

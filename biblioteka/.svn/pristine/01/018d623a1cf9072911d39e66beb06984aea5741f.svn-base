@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {{ partial("parts/header") }}
+</head>
+<body>
+
+<div class="container">
+
+    {{ partial("parts/top") }}
+
+	<div class="row">
+		<div class="col-lg-8">
+            {{ content() }}
+		</div>
+		<div class="col-lg-4">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title"><strong>Kunnen wij u helpen?</strong></h3>
+				</div>
+				<div class="panel-body">
+					<div class="media">
+						<span class="pull-left">
+							{{ image("http://www.yellowmile.com.tr/images_up/adsfadf.jpg", "alt" : "banner", "style" : "max-width: 50px;", "class" : "media-object img-circle img-responsive") }}
+						</span>
+						<div class="media-body" style="padding-top: 8px; padding-left: 20px;">
+							{{ linkTo(["contact", "Stel hier uw vraag aan Astrid <i class='glyphicon glyphicon-play'></i>", "class":"btn btn-default"]) }}
+                        </div>
+					</div>
+				</div>
+			</div>
+
+			<div class="well">
+                <h4><strong>Total projects: <span class="text-danger">{{ total_projects }}</span></strong></h4><br />
+                <h5><strong>Reeds geinvesteerd:</strong></h5>
+                <h3 style="display: block; width: 100%;"><span class="label label-default" style="display: block; width: 100%; text-align: left; padding-top: 8px; padding-bottom: 8px;">&euro; {{ transactions_amount }}</span></h3>
+			</div>
+
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<h4><strong>Actueel</strong></h4>
+					<ul>
+                        {% for news in newsList %}
+                            <li>{{ linkTo(["news/read/" ~ news.news_link, elements.news_shortcut(news.news_title, 35), "class" : "btn btn-link"]) }}</li>
+                        {% endfor %}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{ partial("parts/footer") }}
+
+</body>
+</html>

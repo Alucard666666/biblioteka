@@ -1,0 +1,52 @@
+$(document).ready(function(){
+
+	$('body').on('click', '[data-toggle="modal"]', function(e) {
+		e.preventDefault();
+
+		$(".modal").remove();
+
+		var data_target=$(this).attr('data-target');
+		var data_backdrop=$(this).attr('data-backdrop');
+		data_backdrop = data_backdrop ? data_backdrop : 'static';
+
+		if (data_target=="#") {
+			data_target="#modal"+parseInt(Math.random()*1000);
+		}
+
+		var url = $(this).attr('href');
+		if (url.indexOf('#') == 0) {
+			$(url).modal('open',{keyboard:false,backdrop:data_backdrop});
+		} else {
+			$.ajax({
+				url: url,
+				method: 'POST',
+				data: { 'data_target' : data_target},
+				success: function(data, status) {
+					$('<div class="modal fade" id="'+data_target.replace("#","")+'"><div class="modal-dialog"><div class="modal-content">' + data + '</div></div></div>').modal({width: 800,keyboard:false,backdrop:data_backdrop}).on('hidden', function(){$(data_target).remove();});
+
+				}
+			});
+		}
+
+
+
+	});
+});
+
+function submit_form(target,action){
+    var $form = $('form[data-async]');
+	var data = $form.serializeArray();
+	data.push({name: 'action', value: action});
+
+    $.ajax({
+        type: $form.attr('method'),
+        url: $form.attr('action'),
+        data: data,
+        success: function(data, status) {
+            $(target).html('<div class="modal-dialog"><div class="modal-content">'+data+'</div></div>');
+        }
+    });
+
+    return false;
+}
+

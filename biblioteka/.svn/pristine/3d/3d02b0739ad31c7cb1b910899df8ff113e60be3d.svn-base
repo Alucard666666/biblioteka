@@ -1,0 +1,50 @@
+<?php
+
+
+
+
+class Content extends \Phalcon\Mvc\Model
+{
+
+    /**
+     *
+     * @var integer
+     */
+    public $content_id;
+     
+    /**
+     *
+     * @var string
+     */
+    public $content_title;
+     
+    /**
+     *
+     * @var string
+     */
+    public $content_text;
+     
+    /**
+     *
+     * @var string
+     */
+    public $content_link;
+
+    /**
+     *
+     * @var string
+     */
+    public $content_meta_title;
+
+    /**
+     *
+     * @var string
+     */
+    public $content_meta_description;
+
+    /**
+     *
+     * @var string
+     */
+    public $content_meta_keywords;
+}

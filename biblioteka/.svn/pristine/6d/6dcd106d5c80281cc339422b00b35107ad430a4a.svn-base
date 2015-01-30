@@ -1,0 +1,173 @@
+<?php
+/*
+$configDisplayError 				= 	'on';							   	  	// Display errors
+$configErrorReporting 				= 	255;										// Error reporting mode
+$configSystemVersion 				= 	true;	 							  	// System production mode
+$configDebug 						= 	1;									  	// Debug mode: 0 - turn off, 1 - turn on
+
+if ($configErrorReporting == 0) {
+	error_reporting($configErrorReporting);
+}
+else {
+	error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);										  	// Set error reporting
+}
+
+if ($configSystemVersion != true) {
+	if ($configDebug != 0) {
+		error_reporting(E_ALL);
+	}
+	@ini_set('display_errors', 		$configDisplayError);					 	// Display errors
+}
+
+//error_reporting(E_ALL);
+*/
+try {
+
+    /**
+     * Read the configuration
+     */
+    $config = include __DIR__ . "/../app/config/config.php";
+
+    /**
+     * Read auto-loader
+     */
+    include __DIR__ . "/../app/config/loader.php";
+
+    /**
+     * Read services
+     */
+    include __DIR__ . "/../app/config/services.php";
+
+    /**
+     * Handle the request
+     */
+
+
+	//Setup the view component
+
+    date_default_timezone_set ( "Europe/Amsterdam" );
+
+
+    //Register an autoloader
+	$loader = new \Phalcon\Loader();
+	$loader->registerDirs(array(
+		'../app/controllers/',
+		'../app/models/'
+	));
+
+	$loader->registerClasses(array(
+	    "PHPMailer" => "library/PHPMailer-master/class.phpmailer.php",
+	));
+
+	$loader->register();
+
+
+	$di = new Phalcon\DI\FactoryDefault();
+
+	//Setup the database service
+	$di->set('db', function() use ($config){
+		return new \Phalcon\Db\Adapter\Pdo\Mysql(array(
+			"host" => $config->database->host,
+			"username" => $config->database->username,
+			"password" => $config->database->password,
+			"dbname" => $config->database->dbname,
+			"port" => $config->database->port
+		));
+	});
+
+	$di->set('email', function() use ($config){
+		return	array(
+			"emailFrom"=>$config->email->emailFrom,
+			"emailName"=>$config->email->emailName
+
+		);
+	});
+
+	$di->set('view', function(){
+		$view = new \Phalcon\Mvc\View();
+		$view->setViewsDir('../app/views/');
+		$view->setLayout('main');
+
+		$view->registerEngines(array(
+        	".volt" => 'Phalcon\Mvc\View\Engine\Volt'
+    	));
+
+		return $view;
+	});
+
+
+
+	$di->set('session', function() {
+		$session = new Phalcon\Session\Adapter\Files();
+		$session->start();
+		return $session;
+	});
+
+	$di->set('dispatcher', function() use ($di) {
+		$dispatcher = new Phalcon\Mvc\Dispatcher();
+		return $dispatcher;
+	});
+
+	$di->set('router', function() use ($di) {
+		$router = new \Phalcon\Mvc\Router();
+
+		$router->add(
+			"/news/([a-zA-Z0-9_-]+)",
+			array(
+			    "controller" => "news",
+			    "link"       => 1
+			)
+		);
+
+		$router->add(
+		"/page-([a-zA-Z0-9_-]+)",
+		array(
+		    "controller" => "content",
+		    "link"       => 1
+		)
+		);
+
+		$router->add(
+		"/downloads/([a-zA-Z0-9_-]+\.{1}[a-zA-Z]+)",
+		array(
+		    "controller" => "downloads",
+			"action"	 =>	"download",
+		    "link"       => 1
+		)
+		);
+
+		$router->add(
+		"/project-([a-zA-Z0-9_-]+)",
+		array(
+		    "controller" => "index",
+		    "action"	 => "detail",
+		    "link"       => 1
+		)
+		);
+
+        $router->add(
+            "/ajax/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)",
+            array(
+                "controller" => "ajax",
+                "action"     => 1,
+                "id"         => 2
+            )
+        );
+		return $router;
+	});
+
+    $application = new \Phalcon\Mvc\Application($di);
+
+
+    echo $application->handle()->getContent();
+
+
+
+} catch (\Exception $e) {
+    echo $e->getMessage();
+}
+
+
+
+
+

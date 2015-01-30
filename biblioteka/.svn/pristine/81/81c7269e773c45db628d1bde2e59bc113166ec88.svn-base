@@ -1,0 +1,36 @@
+<?php
+
+class Transactions extends \Phalcon\Mvc\Model
+{
+
+    /**
+     *
+     * @var integer
+     */
+    public $transaction_id;
+
+    /**
+     *
+     * @var integer
+     */
+    public $transaction_user_id;
+
+    /**
+     *
+     * @var integer
+     */
+    public $transaction_project_id;
+
+    /**
+     *
+     * @var float
+     */
+    public $transaction_amount;
+
+    public function initialize()
+    {
+        $this->hasOne("transaction_user_id", "Users", "user_id");
+        $this->hasOne("transaction_project_id", "Projects", "projekt_id");
+    }
+
+}

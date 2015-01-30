@@ -1,0 +1,25 @@
+{{ getTitle() }}
+
+{{ stylesheet_link("bootstrap/css/bootstrap.css") }}
+{{ stylesheet_link("css/style.css") }}
+
+{{ javascript_include("js/jquery-1.11.0.min.js") }}
+{{ javascript_include("js/jquery-ui.js") }}
+{{ javascript_include("bootstrap/js/bootstrap.min.js") }}
+{{ javascript_include("js/jquery.scripts.js") }}
+
+<script>
+    $(function() {
+        $("#slider" ).slider({
+            value:100,
+            min: 0,
+            max: 500,
+            step: 50,
+            slide: function( event, ui ) {
+                $( "#amount" ).val( "$" + ui.value );
+            }
+        });
+
+        $( "#amount" ).val( "$" + $( "#slider" ).slider( "value" ) );
+    });
+</script>

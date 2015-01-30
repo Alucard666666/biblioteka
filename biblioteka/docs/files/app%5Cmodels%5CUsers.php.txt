@@ -1,0 +1,58 @@
+<?php
+
+class Users extends \Phalcon\Mvc\Model
+{
+
+    /**
+     *
+     * @var integer
+     */
+    public $user_id;
+
+    /**
+     *
+     * @var string
+     */
+    public $user_email;
+
+    /**
+     *
+     * @var string
+     */
+    public $user_token;
+
+    /**
+     *
+     * @var integer
+     */
+    public $user_status;
+
+    /**
+     *
+     * @var string
+     */
+    public $user_registerdate;
+
+    /**
+     *
+     * @var string
+     */
+    public $user_validdate;
+
+    /**
+     * Independent Column Mapping.
+     */
+    public function columnMap()
+    {
+        return array(
+            'user_id' => 'user_id', 
+            'user_email' => 'user_email', 
+            'user_token' => 'user_token', 
+            'user_status' => 'user_status', 
+            'user_registerdate' => 'user_registerdate', 
+            'user_validdate' => 'user_validdate'
+        );
+    }
+
+}
+

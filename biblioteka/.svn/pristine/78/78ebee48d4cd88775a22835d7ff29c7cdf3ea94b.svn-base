@@ -1,0 +1,20 @@
+<?php
+
+class ContentController extends ControllerBase
+{
+    public function indexAction(){
+
+		$content = Content::findFirst(
+            array(
+                "content_link = :link:",
+                "bind" => array('link' => $this->dispatcher->getParam("link"))
+    	    )
+        );
+
+        if ($content == FALSE)
+            Elements::error_page();
+
+    	$this->view->content = $content;
+	}
+}
+

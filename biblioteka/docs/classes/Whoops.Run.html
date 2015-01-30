@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>API Documentation</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown">
+                        <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">
+                            API Documentation <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                                                        <li><a href="../namespaces/Composer.html">\Composer</a></li>
+                                                        <li><a href="../namespaces/Whoops.html">\Whoops</a></li>
+                                                    </ul>
+                    </li>
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">409</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">2</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">5</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1994847475"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-1994847475" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2043642574"></a>
+                                <a href="../namespaces/Composer.html" style="margin-left: 30px; padding-left: 0">Composer</a>
+            </div>
+            <div id="namespace-2043642574" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1981784785"></a>
+                                <a href="../namespaces/Composer.Autoload.html" style="margin-left: 30px; padding-left: 0">Autoload</a>
+            </div>
+            <div id="namespace-1981784785" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Composer.Autoload.ClassLoader.html">ClassLoader</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-445297047"></a>
+                                <a href="../namespaces/Whoops.html" style="margin-left: 30px; padding-left: 0">Whoops</a>
+            </div>
+            <div id="namespace-445297047" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1073955742"></a>
+                                <a href="../namespaces/Whoops.Exception.html" style="margin-left: 30px; padding-left: 0">Exception</a>
+            </div>
+            <div id="namespace-1073955742" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Whoops.Exception.ErrorException.html">ErrorException</a></li>
+                                                    <li class="class"><a href="../classes/Whoops.Exception.Formatter.html">Formatter</a></li>
+                                                    <li class="class"><a href="../classes/Whoops.Exception.Frame.html">Frame</a></li>
+                                                    <li class="class"><a href="../classes/Whoops.Exception.FrameCollection.html">FrameCollection</a></li>
+                                                    <li class="class"><a href="../classes/Whoops.Exception.Inspector.html">Inspector</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1111981344"></a>
+                                <a href="../namespaces/Whoops.Handler.html" style="margin-left: 30px; padding-left: 0">Handler</a>
+            </div>
+            <div id="namespace-1111981344" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/Whoops.Handler.HandlerInterface.html">HandlerInterface</a></li>
+                                                                                                    <li class="class"><a href="../classes/Whoops.Handler.CallbackHandler.html">CallbackHandler</a></li>
+                                                    <li class="class"><a href="../classes/Whoops.Handler.Handler.html">Handler</a></li>
+                                                    <li class="class"><a href="../classes/Whoops.Handler.JsonResponseHandler.html">JsonResponseHandler</a></li>
+                                                    <li class="class"><a href="../classes/Whoops.Handler.PlainTextHandler.html">PlainTextHandler</a></li>
+                                                    <li class="class"><a href="../classes/Whoops.Handler.PrettyPageHandler.html">PrettyPageHandler</a></li>
+                                                    <li class="class"><a href="../classes/Whoops.Handler.SoapResponseHandler.html">SoapResponseHandler</a></li>
+                                                    <li class="class"><a href="../classes/Whoops.Handler.XmlResponseHandler.html">XmlResponseHandler</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-192754639"></a>
+                                <a href="../namespaces/Whoops.Provider.html" style="margin-left: 30px; padding-left: 0">Provider</a>
+            </div>
+            <div id="namespace-192754639" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-626945864"></a>
+                                <a href="../namespaces/Whoops.Provider.Phalcon.html" style="margin-left: 30px; padding-left: 0">Phalcon</a>
+            </div>
+            <div id="namespace-626945864" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Whoops.Provider.Phalcon.WhoopsServiceProvider.html">WhoopsServiceProvider</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-51265278"></a>
+                                <a href="../namespaces/Whoops.Provider.Silex.html" style="margin-left: 30px; padding-left: 0">Silex</a>
+            </div>
+            <div id="namespace-51265278" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Whoops.Provider.Silex.WhoopsServiceProvider.html">WhoopsServiceProvider</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2037084919"></a>
+                                <a href="../namespaces/Whoops.Provider.Zend.html" style="margin-left: 30px; padding-left: 0">Zend</a>
+            </div>
+            <div id="namespace-2037084919" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Whoops.Provider.Zend.ExceptionStrategy.html">ExceptionStrategy</a></li>
+                                                    <li class="class"><a href="../classes/Whoops.Provider.Zend.RouteNotFoundStrategy.html">RouteNotFoundStrategy</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1758404431"></a>
+                                <a href="../namespaces/Whoops.Util.html" style="margin-left: 30px; padding-left: 0">Util</a>
+            </div>
+            <div id="namespace-1758404431" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Whoops.Util.Misc.html">Misc</a></li>
+                                                    <li class="class"><a href="../classes/Whoops.Util.TemplateHelper.html">TemplateHelper</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Whoops.Module.html">Module</a></li>
+                                                    <li class="class"><a href="../classes/Whoops.Run.html">Run</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/AclPlugin.html">AclPlugin</a></li>
+                                                    <li class="class"><a href="../classes/AgeValidator.html">AgeValidator</a></li>
+                                                    <li class="class"><a href="../classes/AjaxController.html">AjaxController</a></li>
+                                                    <li class="class"><a href="../classes/BaseModel.html">BaseModel</a></li>
+                                                    <li class="class"><a href="../classes/Books.html">Books</a></li>
+                                                    <li class="class"><a href="../classes/Borrows.html">Borrows</a></li>
+                                                    <li class="class"><a href="../classes/Categories.html">Categories</a></li>
+                                                    <li class="class"><a href="../classes/CategoriesController.html">CategoriesController</a></li>
+                                                    <li class="class"><a href="../classes/ComposerAutoloaderInit03e02bd909c5b1b382d12087f92d2e70.html">ComposerAutoloaderInit03e02bd909c5b1b382d12087f92d2e70</a></li>
+                                                    <li class="class"><a href="../classes/ContactController.html">ContactController</a></li>
+                                                    <li class="class"><a href="../classes/ContentController.html">ContentController</a></li>
+                                                    <li class="class"><a href="../classes/ControllerBase.html">ControllerBase</a></li>
+                                                    <li class="class"><a href="../classes/Debug.html">Debug</a></li>
+                                                    <li class="class"><a href="../classes/DownloadsController.html">DownloadsController</a></li>
+                                                    <li class="class"><a href="../classes/Elements.html">Elements</a></li>
+                                                    <li class="class"><a href="../classes/ErrorController.html">ErrorController</a></li>
+                                                    <li class="class"><a href="../classes/GiftsController.html">GiftsController</a></li>
+                                                    <li class="class"><a href="../classes/IndexController.html">IndexController</a></li>
+                                                    <li class="class"><a href="../classes/LoginController.html">LoginController</a></li>
+                                                    <li class="class"><a href="../classes/MyValidation.html">MyValidation</a></li>
+                                                    <li class="class"><a href="../classes/NewsController.html">NewsController</a></li>
+                                                    <li class="class"><a href="../classes/ProfileController.html">ProfileController</a></li>
+                                                    <li class="class"><a href="../classes/ProjectsController.html">ProjectsController</a></li>
+                                                    <li class="class"><a href="../classes/RegisterController.html">RegisterController</a></li>
+                                                    <li class="class"><a href="../classes/Reservations.html">Reservations</a></li>
+                                                    <li class="class"><a href="../classes/ReservationsController.html">ReservationsController</a></li>
+                                                    <li class="class"><a href="../classes/TransactionController.html">TransactionController</a></li>
+                                                    <li class="class"><a href="../classes/Users.html">Users</a></li>
+                                                    <li class="class"><a href="../classes/UsersController.html">UsersController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/Whoops.html">\Whoops</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\Whoops</small>Run</h1>
+                    <p><em></em></p>
+                    
+                    
+                                        
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/Whoops.Run.html#method_pushHandler" class="">pushHandler()</a><br />
+                                                                    <a href="../classes/Whoops.Run.html#method_popHandler" class="">popHandler()</a><br />
+                                                                    <a href="../classes/Whoops.Run.html#method_getHandlers" class="">getHandlers()</a><br />
+                                                                    <a href="../classes/Whoops.Run.html#method_clearHandlers" class="">clearHandlers()</a><br />
+                                                                    <a href="../classes/Whoops.Run.html#method_register" class="">register()</a><br />
+                                                                    <a href="../classes/Whoops.Run.html#method_unregister" class="">unregister()</a><br />
+                                                                    <a href="../classes/Whoops.Run.html#method_allowQuit" class="">allowQuit()</a><br />
+                                                                    <a href="../classes/Whoops.Run.html#method_silenceErrorsInPaths" class="">silenceErrorsInPaths()</a><br />
+                                                                    <a href="../classes/Whoops.Run.html#method_sendHttpCode" class="">sendHttpCode()</a><br />
+                                                                    <a href="../classes/Whoops.Run.html#method_writeToOutput" class="">writeToOutput()</a><br />
+                                                                    <a href="../classes/Whoops.Run.html#method_handleException" class="">handleException()</a><br />
+                                                                    <a href="../classes/Whoops.Run.html#method_handleError" class="">handleError()</a><br />
+                                                                    <a href="../classes/Whoops.Run.html#method_handleShutdown" class="">handleShutdown()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No public properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/Whoops.Run.html#constant_EXCEPTION_HANDLER" class="">EXCEPTION_HANDLER</a><br />
+                                                                    <a href="../classes/Whoops.Run.html#constant_ERROR_HANDLER" class="">ERROR_HANDLER</a><br />
+                                                                    <a href="../classes/Whoops.Run.html#constant_SHUTDOWN_HANDLER" class="">SHUTDOWN_HANDLER</a><br />
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <a href="../classes/Whoops.Run.html#method_getInspector" class="">getInspector()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/Whoops.Run.html#property_isRegistered" class="">$isRegistered</a><br />
+                                                                    <a href="../classes/Whoops.Run.html#property_allowQuit" class="">$allowQuit</a><br />
+                                                                    <a href="../classes/Whoops.Run.html#property_sendOutput" class="">$sendOutput</a><br />
+                                                                    <a href="../classes/Whoops.Run.html#property_sendHttpCode" class="">$sendHttpCode</a><br />
+                                                                    <a href="../classes/Whoops.Run.html#property_handlerStack" class="">$handlerStack</a><br />
+                                                                    <a href="../classes/Whoops.Run.html#property_silencedPatterns" class="">$silencedPatterns</a><br />
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <a href="../classes/Whoops.Run.html#method_writeToOutputNow" class="">writeToOutputNow()</a><br />
+                                                                    <a href="../classes/Whoops.Run.html#method_isLevelFatal" class="">isLevelFatal()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/Whoops.Run.html#property_canThrowExceptions" class="">$canThrowExceptions</a><br />
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/vendor.filp.whoops.src.Whoops.Run.html"><div class="path-wrapper">vendor\filp\whoops\src\Whoops\Run.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">Default</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                    <div class="namespace-wrapper">\Whoops\Run</div>
+                            </dd>
+
+                        
+                        
+                        
+                        
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr><td colspan="2"><em>None found</em></td></tr>
+                                        </table>
+                </aside>
+            </div>
+
+                                    <a id="constants" name="constants"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Constants</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_EXCEPTION_HANDLER" name="constant_EXCEPTION_HANDLER" class="anchor"></a>
+            <article id="constant_EXCEPTION_HANDLER" class="constant">
+                <h3 class="">EXCEPTION_HANDLER</h3>
+                <pre class="signature">EXCEPTION_HANDLER</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_ERROR_HANDLER" name="constant_ERROR_HANDLER" class="anchor"></a>
+            <article id="constant_ERROR_HANDLER" class="constant">
+                <h3 class="">ERROR_HANDLER</h3>
+                <pre class="signature">ERROR_HANDLER</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_SHUTDOWN_HANDLER" name="constant_SHUTDOWN_HANDLER" class="anchor"></a>
+            <article id="constant_SHUTDOWN_HANDLER" class="constant">
+                <h3 class="">SHUTDOWN_HANDLER</h3>
+                <pre class="signature">SHUTDOWN_HANDLER</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                            
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_isRegistered" name="property_isRegistered" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$isRegistered</h3>
+                <pre class="signature">$isRegistered : </pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_allowQuit" name="property_allowQuit" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$allowQuit</h3>
+                <pre class="signature">$allowQuit : </pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sendOutput" name="property_sendOutput" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$sendOutput</h3>
+                <pre class="signature">$sendOutput : </pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sendHttpCode" name="property_sendHttpCode" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$sendHttpCode</h3>
+                <pre class="signature">$sendHttpCode : </pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_handlerStack" name="property_handlerStack" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$handlerStack</h3>
+                <pre class="signature">$handlerStack : array&lt;mixed,\Whoops\Handler\HandlerInterface&gt;</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                array&lt;mixed,<a href="../classes/Whoops.Handler.HandlerInterface.html">\Whoops\Handler\HandlerInterface</a>&gt;
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_silencedPatterns" name="property_silencedPatterns" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$silencedPatterns</h3>
+                <pre class="signature">$silencedPatterns : </pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_canThrowExceptions" name="property_canThrowExceptions" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$canThrowExceptions</h3>
+                <pre class="signature">$canThrowExceptions : boolean</pre>
+                <p><em>In certain scenarios, like in shutdown handler, we can not throw exceptions</em></p>
+                
+
+                                <h4>Type</h4>
+                boolean
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_pushHandler" name="method_pushHandler" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">pushHandler()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">pushHandler(Callable|\Whoops\Handler\HandlerInterface  <span class="argument">$handler</span>) : \Whoops\Run</pre>
+                <p><em>Pushes a handler to the end of the stack</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>Callable|<a href="../classes/Whoops.Handler.HandlerInterface.html">\Whoops\Handler\HandlerInterface</a></td>
+                                <td>$handler </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\InvalidArgumentException</dt>
+                            <dd><p>If argument is not callable or instance of HandlerInterface</p></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Whoops.Run.html">\Whoops\Run</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_popHandler" name="method_popHandler" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">popHandler()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">popHandler() : null|\Whoops\Handler\HandlerInterface</pre>
+                <p><em>Removes the last handler in the stack and returns it.</em></p>
+                <p>Returns null if there"s nothing else to pop.</p>
+
+                
+                
+                                    <h4>Returns</h4>
+                    null|<a href="../classes/Whoops.Handler.HandlerInterface.html">\Whoops\Handler\HandlerInterface</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getHandlers" name="method_getHandlers" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getHandlers()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getHandlers() : array</pre>
+                <p><em>Returns an array with all handlers, in the
+order they were added to the stack.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_clearHandlers" name="method_clearHandlers" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">clearHandlers()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">clearHandlers() : \Whoops\Run</pre>
+                <p><em>Clears all handlers in the handlerStack, including
+the default PrettyPage handler.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Whoops.Run.html">\Whoops\Run</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_register" name="method_register" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">register()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">register() : \Whoops\Run</pre>
+                <p><em>Registers this instance as an error handler.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Whoops.Run.html">\Whoops\Run</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_unregister" name="method_unregister" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">unregister()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">unregister() : \Whoops\Run</pre>
+                <p><em>Unregisters all handlers registered by this Whoops\Run instance</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Whoops.Run.html">\Whoops\Run</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_allowQuit" name="method_allowQuit" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">allowQuit()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">allowQuit(boolean|integer  <span class="argument">$exit = null</span>) : boolean</pre>
+                <p><em>Should Whoops allow Handlers to force the script to quit?</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>boolean|integer</td>
+                                <td>$exit </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_silenceErrorsInPaths" name="method_silenceErrorsInPaths" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">silenceErrorsInPaths()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">silenceErrorsInPaths(array|string  <span class="argument">$patterns</span>, integer  <span class="argument">$levels = 10240</span>) : \Whoops\Run</pre>
+                <p><em>Silence particular errors in particular files</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array|string</td>
+                                <td>$patterns </td>
+                                <td><p>List or a single regex pattern to match</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$levels </td>
+                                <td><p>Defaults to E_STRICT | E_DEPRECATED</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Whoops.Run.html">\Whoops\Run</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_sendHttpCode" name="method_sendHttpCode" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">sendHttpCode()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">sendHttpCode(  <span class="argument">$code = null</span>) </pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$code </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_writeToOutput" name="method_writeToOutput" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">writeToOutput()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">writeToOutput(boolean|integer  <span class="argument">$send = null</span>) : boolean</pre>
+                <p><em>Should Whoops push output directly to the client?
+If this is false, output will be returned by handleException</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>boolean|integer</td>
+                                <td>$send </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_handleException" name="method_handleException" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">handleException()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">handleException(\Exception  <span class="argument">$exception</span>) : string</pre>
+                <p><em>Handles an exception, ultimately generating a Whoops error
+page.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Exception</td>
+                                <td>$exception </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>Output generated by handlers</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_handleError" name="method_handleError" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">handleError()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">handleError(integer  <span class="argument">$level</span>, string  <span class="argument">$message</span>, string  <span class="argument">$file = null</span>, integer  <span class="argument">$line = null</span>) : boolean|null</pre>
+                <p><em>Converts generic PHP errors to \ErrorException
+instances, before passing them off to be handled.</em></p>
+                <p>This method MUST be compatible with set_error_handler.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$level </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$message </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$file </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$line </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean|null
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_handleShutdown" name="method_handleShutdown" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">handleShutdown()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">handleShutdown() </pre>
+                <p><em>Special case to deal with Fatal errors and the like.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getInspector" name="method_getInspector" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">getInspector()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getInspector(\Exception  <span class="argument">$exception</span>) : \Whoops\Exception\Inspector</pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Exception</td>
+                                <td>$exception </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Whoops.Exception.Inspector.html">\Whoops\Exception\Inspector</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_writeToOutputNow" name="method_writeToOutputNow" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">writeToOutputNow()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">writeToOutputNow(string  <span class="argument">$output</span>) : $this</pre>
+                <p><em>Echo something to the browser</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$output </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_isLevelFatal" name="method_isLevelFatal" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">isLevelFatal()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">isLevelFatal(  <span class="argument">$level</span>) </pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$level </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">Run.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/vendor\filp\whoops\src\Whoops\Run.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                            <li><a href="../namespaces/Composer.html">\Composer</a></li>
+                                                                            <li><a href="../namespaces/Whoops.html">\Whoops</a></li>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on January 30th, 2015 at 14:39.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>

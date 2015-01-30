@@ -1,0 +1,139 @@
+<?php
+
+use Phalcon\Forms\Element\Text,
+	Phalcon\Forms\Form,
+	Phalcon\Validation\Validator\PresenceOf,
+	Phalcon\Validation\Validator\Email,
+	Phalcon\Validation\Validator\StringLength,
+	Phalcon\Validation\Validator\Regex as RegexValidator;
+
+class ContactController extends ControllerBase
+{
+
+	public function indexAction()
+	{
+
+	}
+
+	public function validateAction()
+	{
+		$validation = new Phalcon\Validation();
+
+		$validation->add('tussenvoegsel', new PresenceOf(array(
+			'message' => 'The tussenvoegsel is required'
+		)));
+
+		$validation->add('voorletters', new PresenceOf(array(
+			'message' => 'The voorletters is required'
+		)));
+
+		$validation->add('achternaam', new PresenceOf(array(
+			'message' => 'The achternaam is required'
+		)));
+
+		$validation->add('straat', new PresenceOf(array(
+			'message' => 'The straat is required'
+		)));
+
+		$validation->add('postcode', new RegexValidator(array(
+			'pattern' => '/^[\d]{4}[\s]?[a-zA-Z]{2}+$/',
+			'message' => 'Incorrent postcode'
+		)));
+
+		$validation->add('nr', new RegexValidator(array(
+			'pattern' => '/^[\d]+[a-zA-Z]?+$/',
+			'message' => 'The nr is required'
+		)));
+
+		$validation->add('plaats', new PresenceOf(array(
+			'message' => 'The plaats is required'
+		)));
+
+		$validation->add('telefoonnummer', new RegexValidator(array(
+			'pattern' => '/^\+?[\d -]+$/',
+			'message' => 'The telefoonnummer is required'
+		)));
+
+		$validation->add('email', new Email(array(
+			'message' => 'The e-mail is not valid'
+		)));
+
+
+		$validation->add('text', new PresenceOf(array(
+			'message' => 'The text is required'
+		)));
+
+		$messages = $validation->validate($_POST);
+
+		if (count($messages)) {
+
+			foreach ($messages as $message)
+				$error[$message->getField()] = $message;
+
+			$this->view->setVars(array("error" => $error));
+
+			$this->dispatcher->forward(array(
+	            "controller" => "contact",
+	            "action" => "index"
+	        ));
+
+		} else {
+
+			$this->dispatcher->forward(array(
+	            "controller" => "contact",
+	            "action" => "send"
+	        ));
+		}
+	}
+
+	public function sendAction()
+	{
+		if($this->request->isPost() == true){
+
+			$mail = new PHPMailer();
+
+			$address = "adrian.mosur@gmail.com";
+
+			$body = "
+				<b>Name</b>: ".	$this->request->getPost('tussenvoegsel')." ".	$this->request->getPost('voorletters')." ".	$this->request->getPost('achternaam')."<br />
+				<b>Street</b>: ".$this->request->getPost('straat')." ".$this->request->getPost('nr')."<br />
+				<b>Postcode/City</b>: ".$this->request->getPost('postcode')." ".$this->request->getPost('plaats')."<br />
+				<b>Phone</b>: ".$this->request->getPost('telefoonnummer')."<br />
+				<b>Email</b>: ".$this->request->getPost('email')."<br />
+				<b>Roden</b>: ".$this->request->getPost('reden')."<br />
+				<b>Text</b>: ".$this->request->getPost('text')."
+
+			";
+
+			$mail->SetFrom($this->email['emailFrom'],  $this->email['emailName']);
+
+			$mail->AddAddress($address, "John Doe");
+
+			$mail->Subject = "Email From ksoi.nl";
+
+			$mail->AltBody = "To view the message, please use an HTML compatible email viewer!";
+
+			$mail->MsgHTML($body);
+
+			if($mail->send()) {
+
+				$this->view->setVar("error", 1);
+
+				$this->view->setVar("errorLabel", "Message has been sent");
+
+			} else {
+				$this->view->setVar("error", 0);
+
+				$this->view->setVar("errorLabel", "Error, please try again!");
+			}
+
+		} else {
+
+			return $this->response->redirect('contact');
+
+		}
+	}
+}
+
+
+

@@ -1,0 +1,48 @@
+<?php
+
+use Phalcon\Paginator\Adapter\Model as Paginator;
+
+class NewsController extends ControllerBase
+{
+    public function indexAction(){
+        $this->dispatcher->forward(
+            array(
+                "controller" => "news",
+                "action" => "page",
+                "param" => "1"
+            )
+        );
+	}
+
+    public function readAction(){
+        $news = News::findFirst(
+            array(
+                "news_link = :link:",
+                "bind" => array('link' => $this->dispatcher->getParam(0))
+            )
+        );
+
+        if ($news == FALSE)
+            Elements::error_page();
+
+        $this->view->news = $news;
+    }
+
+    public function pageAction(){
+        $currentPage = (int) $this->dispatcher->getParam(0) > 1 ? (int) $this->dispatcher->getParam(0) : 1 ;
+
+        $news = News::find();
+
+        $paginator = new Paginator(
+            array(
+                "data" => $news,
+                "limit" => $this->conf['news_limit'],
+                "page" => $currentPage
+            )
+        );
+
+        $this->view->news = $paginator->getPaginate();
+    }
+
+}
+

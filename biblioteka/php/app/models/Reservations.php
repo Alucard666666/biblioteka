@@ -1,0 +1,50 @@
+<?php
+
+class Reservations extends \Phalcon\Mvc\Model
+{
+
+    /**
+     *
+     * @var integer
+     */
+    public $reservation_id;
+
+    /**
+     *
+     * @var integer
+     */
+    public $reservation_book_id;
+
+    /**
+     *
+     * @var string
+     */
+    public $reservation_start;
+
+    /**
+     *
+     * @var string
+     */
+    public $reservation_end;
+
+    /**
+     *
+     * @var integer
+     */
+    public $reservation_status;
+
+    /**
+     * Independent Column Mapping.
+     */
+    public function columnMap()
+    {
+        return array(
+            'reservation_id' => 'reservation_id', 
+            'reservation_book_id' => 'reservation_book_id',
+            'reservation_start' => 'reservation_start', 
+            'reservation_end' => 'reservation_end', 
+            'reservation_status' => 'reservation_status'
+        );
+    }
+
+}

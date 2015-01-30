@@ -1,0 +1,4 @@
+<ul class="nav nav-tabs">
+    <li{% if router.getActionName() == NULL OR router.getActionName() == "index" %} class="active"{% endif %}>{{ linkTo(["users", "My transacties"]) }}</li>
+    <li{% if router.getActionName() == "profile" %} class="active"{% endif %}>{{ linkTo(["users/profile", "Profile"]) }}</li>
+</ul>

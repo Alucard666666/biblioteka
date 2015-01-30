@@ -1,0 +1,32 @@
+
+$(function () {
+
+    var start = new Date();
+
+    $('.birthdate').datetimepicker({
+        pickTime: false,
+        format:"DD-MM-YYYY",
+        maxDate: start.getDate()+"/"+(start.getMonth()+1)+"/"+(start.getFullYear()-18),
+        defaultDate:"",
+        useCurrent: false
+    });
+});
+
+$(function() {
+    $("#slider" ).slider({
+        value:100,
+        min: 0,
+        max: 500,
+        step: 50,
+        slide: function( event, ui ) {
+            $( "#amount" ).val( "$" + ui.value );
+        }
+    });
+
+    $( "#amount" ).val( "$" + $( "#slider" ).slider( "value" ) );
+});
+
+$(document).ready(function(){
+    $(".date").inputmask("99-99-9999");
+    $(".postcode").inputmask("9999 aa");
+});

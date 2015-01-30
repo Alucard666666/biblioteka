@@ -1,0 +1,163 @@
+<div class="row">
+    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+        <h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-home"></i> Dashboard <span>> My Dashboard</span></h1>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-xs-12 col-sm-5 col-md-5 col-lg-7">
+
+        <div class="well">
+            <br />
+                <blockquote>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                    <small>Someone famous in <cite title="Source Title">Source Title</cite></small>
+                </blockquote>
+
+                <br />
+
+                <img src="http://www.ksiazkidlaciebie.pl/themes/default/images/banner_02.jpg" class="img-responsive" alt="">
+            </div>
+        </div>
+
+        <article class="col-sm-12 col-md-7 col-lg-5">
+
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+                <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                    <h2>Basic Form Elements </h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        <form class="smart-form">
+                            <fieldset>
+                                <section>
+                                    <label class="label">Extra Small text input</label>
+                                    <label class="input">
+                                        <input type="text">
+                                    </label>
+                                </section>
+
+                                <section>
+                                    <label class="label">Small text input</label>
+                                    <label class="input">
+                                        <input type="text" class="input-sm">
+                                    </label>
+                                </section>
+
+                                <section>
+                                    <label class="label">Default text input with maxlength</label>
+                                    <label class="input">
+                                        <input type="text" maxlength="10">
+                                    </label>
+                                </section>
+
+                                <section>
+                                    <label class="label">Input with autocomlete</label>
+                                    <label class="input">
+                                        <input type="text" list="list">
+                                        <datalist id="list">
+                                            <option value="Alexandra">Alexandra</option>
+                                            <option value="Alice">Alice</option>
+                                            <option value="Anastasia">Anastasia</option>
+                                            <option value="Avelina">Avelina</option>
+                                            <option value="Basilia">Basilia</option>
+                                            <option value="Beatrice">Beatrice</option>
+                                            <option value="Cassandra">Cassandra</option>
+                                            <option value="Cecil">Cecil</option>
+                                            <option value="Clemencia">Clemencia</option>
+                                            <option value="Desiderata">Desiderata</option>
+                                            <option value="Dionisia">Dionisia</option>
+                                            <option value="Edith">Edith</option>
+                                            <option value="Eleanora">Eleanora</option>
+                                            <option value="Elizabeth">Elizabeth</option>
+                                            <option value="Emma">Emma</option>
+                                            <option value="Felicia">Felicia</option>
+                                            <option value="Florence">Florence</option>
+                                            <option value="Galiana">Galiana</option>
+                                            <option value="Grecia">Grecia</option>
+                                            <option value="Helen">Helen</option>
+                                            <option value="Helewisa">Helewisa</option>
+                                            <option value="Idonea">Idonea</option>
+                                            <option value="Isabel">Isabel</option>
+                                            <option value="Joan">Joan</option>
+                                            <option value="Juliana">Juliana</option>
+                                            <option value="Karla">Karla</option>
+                                            <option value="Karyn">Karyn</option>
+                                            <option value="Kate">Kate</option>
+                                            <option value="Lakisha">Lakisha</option>
+                                            <option value="Lana">Lana</option>
+                                            <option value="Laura">Laura</option>
+                                            <option value="Leona">Leona</option>
+                                            <option value="Mandy">Mandy</option>
+                                            <option value="Margaret">Margaret</option>
+                                            <option value="Maria">Maria</option>
+                                            <option value="Nanacy">Nanacy</option>
+                                            <option value="Nicole">Nicole</option>
+                                            <option value="Olga">Olga</option>
+                                            <option value="Pamela">Pamela</option>
+                                            <option value="Patricia">Patricia</option>
+                                            <option value="Qiana">Qiana</option>
+                                            <option value="Rachel">Rachel</option>
+                                            <option value="Ramona">Ramona</option>
+                                            <option value="Samantha">Samantha</option>
+                                            <option value="Sandra">Sandra</option>
+                                            <option value="Tanya">Tanya</option>
+                                            <option value="Teresa">Teresa</option>
+                                            <option value="Ursula">Ursula</option>
+                                            <option value="Valerie">Valerie</option>
+                                            <option value="Veronica">Veronica</option>
+                                            <option value="Wilma">Wilma</option>
+                                            <option value="Yasmin">Yasmin</option>
+                                            <option value="Zelma">Zelma</option>
+                                        </datalist>
+                                    </label>
+                                </section>
+                            </fieldset>
+
+                            <footer>
+                                <button type="submit" class="btn btn-primary">
+                                    Submit
+                                </button>
+                                <button type="button" class="btn btn-default" onclick="window.history.back();">
+                                    Back
+                                </button>
+                            </footer>
+                        </form>
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+        </article>
+</div>

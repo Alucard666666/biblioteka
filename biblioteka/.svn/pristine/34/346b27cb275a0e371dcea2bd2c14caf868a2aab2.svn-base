@@ -1,0 +1,29 @@
+<?php
+
+class NewsController extends ControllerBase
+{
+    public function indexAction(){
+
+		$newsList = new News();
+
+		$news = $newsList->findFirst(array(
+			"news_link = :link:",
+			"bind" => array('link' => $this->dispatcher->getParam("link"))
+    	));
+
+    	if ($news == true) {
+
+    		$this->view->news = $news;
+
+    	} else {
+
+    		$result = $newsList -> findFirst(array("order" => "news_date DESC"));
+
+    		if($result->count()>0)
+    			return $this->response->redirect('news/'.$result->news_link);
+    		 else
+				return $this->response->redirect('index');
+		}
+	}
+}
+

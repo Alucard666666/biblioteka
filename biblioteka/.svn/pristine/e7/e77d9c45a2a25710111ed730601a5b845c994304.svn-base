@@ -1,0 +1,23 @@
+<?php
+
+
+error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED);
+
+$config = include __DIR__ . "/../app/config/config.php";
+
+include __DIR__ . "/../vendor/autoload.php";
+
+include __DIR__ . "/../app/config/loader.php";
+
+include __DIR__ . "/../app/config/services.php";
+
+date_default_timezone_set ( "Europe/Amsterdam" );
+
+$application = new \Phalcon\Mvc\Application($di);
+echo $application->handle()->getContent();
+
+
+
+
+
+

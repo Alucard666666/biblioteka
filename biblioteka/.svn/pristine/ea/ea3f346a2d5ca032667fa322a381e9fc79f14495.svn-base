@@ -1,0 +1,79 @@
+<?php
+
+use Phalcon\Forms\Element\Text,
+    Phalcon\Validation\Validator,
+    Phalcon\Forms\Form,
+    Phalcon\Validation\ValidatorInterface,
+    Phalcon\Validation\Validator\PresenceOf,
+    Phalcon\Validation\Validator\Email,
+    Phalcon\Validation\Validator\StringLength,
+    Phalcon\Validation\Validator\Regex as RegexValidator,
+    Phalcon\Validation\Validator\Between;
+
+class AjaxController extends ControllerBase
+{
+	public function initialize(){
+        $this->view->setLayout('main_ajax');
+	}
+
+	public function indexAction()
+	{
+
+	}
+	public function transactieAction()
+	{
+        if ($this->request->isAjax() == true ) {
+            if($this->request->getPost("_send")){
+
+                $validation = new Phalcon\Validation();
+
+                $validation->add('amount', new Between(array(
+                    'minimum' => 1,
+                    'maximum' => 9999,
+                    'message' => 'The price must be between 0 and 100'
+                )));
+
+                $messages = $validation->validate($_POST);
+
+                if (count($messages)) {
+                    foreach ($messages as $message)
+                        $error[$message->getField()] = $message;
+
+                    $this->view->setVars(array("error" => $error));
+                } else {
+                    $this->dispatcher->forward(array(
+                        "controller" => "ajax",
+                        "action" => "pay"
+                    ));
+                }
+            }
+        } else {
+            return $this->response->redirect();
+        }
+	}
+
+    public function payAction()
+    {
+
+        if ($this->request->isPost() == true) {
+
+            $transaction = new Transactions();
+
+            $user = $this->session->get('auth');
+
+            $transaction->transaction_user_id = $user['user_id'];
+            $transaction->transaction_project_id = $this->dispatcher->getParam("id");
+            $transaction->transaction_amount = $this->request->getPost("amount");
+
+            $transaction->save();
+
+        } else {
+
+            return $this->response->redirect();
+
+        }
+    }
+}
+
+
+

@@ -1,0 +1,29 @@
+<?php
+
+return new \Phalcon\Config(array(
+    'database' => array(
+        'adapter'     => 'Mysql',
+        'host'        => 'dbhost',
+        'username'    => 'dbuser',
+        'password'    => 'dbpass',
+        'dbname'      => 'namedb',
+        'port'    	  =>  3306,
+
+    ),
+	'application' => array(
+	    'controllersDir' => __DIR__ . '/../../app/controllers/',
+	    'modelsDir'      => __DIR__ . '/../../app/models/',
+	    'viewsDir'       => __DIR__ . '/../../app/views/',
+	    'pluginsDir'     => __DIR__ . '/../../app/plugins/',
+	    'libraryDir'     => __DIR__ . '/../../app/library/',
+	    'cacheDir'       => __DIR__ . '/../../app/cache/',
+	    'baseUri'        => '/',
+	),
+    'version' => array(
+        'system_version' => 'JENKINS_SYSTEM_VERSION'
+    ),
+	'email' => array(
+	    'emailFrom' => 'contact@ksoi.nl',
+	    'emailName' => 'admin'
+	)
+));

@@ -1,0 +1,24 @@
+<?php
+
+use Phalcon\Mvc\Controller;
+
+class ControllerBase extends Controller
+{
+	public function initialize()
+	{
+		$newsList = News::find(
+            array(
+                "limit" => 5,
+                "order" => "news_date DESC"
+            )
+        );
+
+        $this->view->newsList = $newsList;
+
+		$this->view->transactions_amount = Elements::formatCurrency(Transactions::sum(
+            array(
+			    "column" => "transaction_amount"
+		    )
+        ));
+	}
+}

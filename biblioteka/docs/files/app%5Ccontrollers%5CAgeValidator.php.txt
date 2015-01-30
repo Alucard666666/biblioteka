@@ -1,0 +1,27 @@
+<?php
+
+use Phalcon\Mvc\Model\Validator,
+    Phalcon\Mvc\Model\ValidatorInterface;
+
+class AgeValidator extends Validator implements ValidatorInterface
+{
+    public function validate($model)
+    {
+        $field = $this->getOption('field');
+
+        $value = Elements::calculateAge($model->$field);
+
+        if ($value == false) {
+            $this->appendMessage("Incorect date", $field, "AgeValidator");
+            return false;
+        }
+
+        if ($value == 0) {
+            $this->appendMessage("You are too young", $field, "AgeValidator");
+            return false;
+        }
+
+        return true;
+    }
+
+}

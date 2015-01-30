@@ -1,0 +1,22 @@
+<?php
+
+class DownloadsController extends ControllerBase
+{
+    public function indexAction()
+    {
+        $documents = Documents::find();
+        $this->view->documents = $documents;
+    }
+
+	public function downloadAction()
+	{
+		$this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_NO_RENDER);
+		header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+		header('Content-Description: File Transfer');
+		header('Content-type:  application/pdf');
+		header('Content-Disposition: attachment; filename="'.$this->dispatcher->getParam(0).'"');
+        readfile("../public/files/".$this->dispatcher->getParam(0));
+	}
+
+}
+

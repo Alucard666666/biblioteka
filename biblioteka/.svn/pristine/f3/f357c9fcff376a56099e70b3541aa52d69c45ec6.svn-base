@@ -1,0 +1,43 @@
+<?php
+
+class Comments extends \Phalcon\Mvc\Model
+{
+
+    /**
+     *
+     * @var integer
+     */
+    public $comment_id;
+
+    /**
+     *
+     * @var integer
+     */
+    public $comment_user_id;
+
+    /**
+     *
+     * @var integer
+     */
+    public $comment_project_id;
+
+    /**
+     *
+     * @var string
+     */
+    public $comment_text;
+
+    /**
+     *
+     * @var string
+     */
+    public $comment_date;
+
+    /**
+     * Independent Column Mapping.
+     */
+
+    public function initialize(){
+        $this->hasOne("comment_user_id", "Users", "user_id");
+    }
+}

@@ -1,0 +1,19 @@
+{% if news.items %}
+    {% for item in news.items %}
+        <div class="media">
+            <div class="media-body">
+                <p class="text-muted text-right"><small>{{ date('d-m-Y', elements.strtotime(item.news_date)) }}</small></p>
+                <h4 class="media-heading">{{ item.news_title }}</h4>
+                <p>{{ elements.news_shortcut(item.news_text|striptags, 400) }}</p>
+
+                <a href="/news/read/{{ item.news_link }}" class="btn btn-warning pull-right btn-xs" style="margin-top: 20px;">Show news</a>
+            </div>
+        </div>
+        <hr />
+    {% endfor %}
+
+    {{ elements.navigation(news, 'news') }}
+
+{% else %}
+    <h3 class="text-center">No news</h3>
+{% endif %}

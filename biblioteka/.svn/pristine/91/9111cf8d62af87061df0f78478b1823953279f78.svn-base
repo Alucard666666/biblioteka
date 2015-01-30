@@ -1,0 +1,33 @@
+<div class="panel panel-primary" style="margin-top: 20px;">
+	<div class="panel-heading">
+		<h3 class="panel-title"><strong>Project informatie</strong></h3>
+	</div>
+	<div class="panel-body">
+
+        <?php foreach ($rows as $project) { ?>
+
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <h5 class="text-primary"><strong><?php echo $project['project']['projekt_title'] ?></strong> <?php echo $this->tag->linkTo(array('project-'.$project['project']['projekt_link'], 'Toon details <i class="glyphicon glyphicon-play"></i>', 'class'=>'btn btn-default btn-xs', 'style'=>'margin-left: 10px;'))." "; ?></h5>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="<?php echo $project['project']['projekt_percent']; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $project['project']['projekt_percent']; ?>%">
+                            <?php echo $project['project']['projekt_percent']; ?>%
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-12">
+                    <h5><?php echo $project['project']['projekt_description']; ?></h5>
+                </div>
+
+            </div>
+
+        <?php } ?>
+
+	</div>
+</div>

@@ -1,0 +1,19 @@
+<?php
+
+use Phalcon\Mvc\Controller,
+    Phalcon\Mvc\ModelInterface;
+
+class ControllerBase extends Controller
+{
+	public $settings;
+
+	public function initialize()
+	{
+		$this->view->newsList = News::find(array("order" => "news_date DESC"));
+
+		$this->view->transactions_amount = Globals::formatCurrency(Transactions :: sum(array(
+			"column" => "transaction_amount"
+			//"conditions" => "transaction_user_id = '".$user['user_id']."'"
+		)));
+	}
+}

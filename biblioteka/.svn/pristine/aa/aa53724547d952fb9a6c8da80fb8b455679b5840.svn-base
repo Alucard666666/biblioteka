@@ -1,0 +1,24 @@
+<table class="table table-striped">
+    <colgroup>
+        <col>
+        <col style="width: 15%;">
+        <col style="width: 15%;">
+        <col style="width: 10%;">
+    </colgroup>
+    <thead>
+        <th>Document title</th>
+        <th>Size</th>
+        <th>Date</th>
+        <th></th>
+    </thead>
+    <tbody>
+        {% for document in documents %}
+            <tr>
+                <td>{{ document.document_title }}</td>
+                <td>{{ document.document_size }}</td>
+                <td>{{ document.document_date }}</td>
+                <td>{{ link_to("downloads/download/" ~ document.document_link, "Download") }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

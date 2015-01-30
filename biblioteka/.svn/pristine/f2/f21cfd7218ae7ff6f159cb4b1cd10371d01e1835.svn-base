@@ -1,0 +1,21 @@
+<?php
+
+class ContentController extends ControllerBase
+{
+    public function indexAction(){
+
+		$contents = new Content();
+
+		$content = $contents->findFirst(array(
+			"content_link = :link:",
+			"bind" => array('link' => $this->dispatcher->getParam("link"))
+    	));
+
+    	if ($content == true)
+    		$this->view->content = $content;
+		 else
+	    	return $this->response->redirect();
+
+	}
+}
+

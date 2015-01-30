@@ -1,0 +1,164 @@
+<?php
+
+use Phalcon\Mvc\Model\Validator\InclusionIn,
+    Phalcon\Mvc\Model\Validator\Uniqueness;
+use Phalcon\Mvc\Model\Validator\PresenceOf,
+    Phalcon\Mvc\Model\Validator\Email as EmailValidator,
+    Phalcon\Mvc\Model\Validator\Regex as RegexValidator;
+use Phalcon\Mvc\Model\Validator\StringLength  as StringLength;
+
+
+
+class Users extends \Phalcon\Mvc\Model
+{
+    /**
+     *
+     * @var integer
+     */
+    public $user_id;
+
+    /**
+     *
+     * @var string
+     */
+    public $user_name;
+
+    /**
+     *
+     * @var string
+     */
+    public $user_password;
+
+    /**
+     *
+     * @var string
+     */
+    public $user_email;
+
+    /**
+     *
+     * @var string
+     */
+    public $user_street;
+
+    /**
+     *
+     * @var string
+     */
+    public $user_house;
+
+    /**
+     *
+     * @var string
+     */
+    public $user_postcode;
+
+    /**
+     *
+     * @var string
+     */
+    public $user_city;
+
+    /**
+     *
+     * @var string
+     */
+    public $user_birth_city;
+
+    /**
+     *
+     * @var date
+     */
+    public $user_birth_date;
+
+    /**
+     *
+     * @var string
+     */
+    public $user_phone;
+
+    /**
+     *
+     * @var string
+     */
+    public $user_mobile;
+
+    /**
+     *
+     * @var string
+     */
+    public $user_www;
+
+    /**
+     *
+     * @var string
+     */
+    public $user_fax;
+
+    /**
+     *
+     * @var string
+     */
+    public $user_account_number;
+
+    /**
+     *
+     * @var date
+     */
+    public $user_active_until;
+
+    /**
+     *
+     * @var string
+     */
+    public $user_active;
+
+    /**
+     *
+     * @var date
+     */
+    public $user_lastlogin;
+
+    /**
+     *
+     * @var string
+     */
+    public $user_token;
+
+    /**
+     *
+     * @var date
+     */
+    public $user_date;
+
+    public function initialize()
+    {
+        $this->skipAttributes(array('user_phone','user_mobile','user_www','user_fax'));
+        $this->skipAttributesOnCreate(array('user_lastlogin'));
+        $this->skipAttributesOnUpdate(array('user_token','user_date'));
+
+        $this->hasMany("user_id", "Transactions", "transaction_user_id");
+    }
+
+    public function validation()
+    {
+        $this->validate(new Uniqueness(array(
+            "field" => "user_email",
+            "message" => "E-mail name must be unique"
+        )));
+
+        if ($this->validationHasFailed() == true)
+            return false;
+    }
+
+    public function beforeValidationOnCreate()
+    {
+        $this->user_token = sha1(md5($this->user_email.rand(1,100)));
+        $this->user_active_until = date("Y-m-d H:i:s", strtotime("+ 1 year"));
+    }
+
+    public function afterCreate()
+    {
+
+    }
+}

@@ -1,0 +1,39 @@
+<?php
+
+
+
+
+class News extends \Phalcon\Mvc\Model
+{
+
+    /**
+     *
+     * @var integer
+     */
+    public $news_id;
+     
+    /**
+     *
+     * @var string
+     */
+    public $news_title;
+     
+    /**
+     *
+     * @var string
+     */
+    public $news_text;
+     
+    /**
+     *
+     * @var string
+     */
+    public $news_link;
+     
+    /**
+     *
+     * @var string
+     */
+    public $news_date;
+     
+}

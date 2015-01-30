@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<project name="Groundfunding System" default="local" basedir="." description="Groundfunding System">
+
+    <property name="devdir"  value="/var/www/develop/groundfunding.nl" />
+    <property name="proddir"  value="/var/www/prod/groundfunding.nl" />
+
+    <property name="svnpath" value="/usr/bin/svn" />
+    <property name="tags" value="svn://gbin.nl/svn/tags/groundfunding/" />
+    <property name="trunk" value="svn://gbin.nl/svn/trunk/groundfunding/groundfunding.nl/" />
+
+    <target name="local">
+        <copy file="./configs/local.config.php" tofile="./php/app/config/config.php" />
+        <copy file="./nginx/local.nginx.conf" tofile="C:/server/bin/nginx/conf/domains-enabled/groundfunding.conf" />
+
+        <exec command="cd C:/server &amp;&amp; C:/server/restart-wpnxm.bat nginx" passthru="true"/>
+    </target>
+
+    <target name="dev">
+        <copy todir="${devdir}" includeemptydirs="true">
+            <fileset dir=".">
+                <include name="**" />
+            </fileset>
+        </copy>
+
+        <copy file="./configs/dev.config.php" tofile="${devdir}/php/app/config/config.php" />
+
+        <copy file="./nginx/dev.nginx.conf" tofile="/etc/nginx/sites-available/dev.groundfunding.nl" />
+
+        <symlink target="/etc/nginx/sites-available/dev.groundfunding.nl" link="/etc/nginx/sites-enabled/dev.groundfunding.nl" />
+
+        <taskdef name="dbdeploy" classname="phing.tasks.ext.dbdeploy.DbDeployTask"/>
+
+        <dbdeploy
+                url="mysql:host=gbin.nl;dbname=dev_groundfunding"
+                userid="developer"
+                password="123qwe"
+                dir="${devdir}/database/"
+                outputfile="${devdir}/all-db.sql"
+                undooutputfile="${devdir}/undo-all-db.sql"
+        />
+
+        <exec command="/usr/bin/mysql -hgbin.nl -udeveloper -p123qwe dev_groundfunding &lt; ${devdir}/all-db.sql" dir="${devdir}/" checkreturn="true" />
+
+        <exec command="chmod -R 0777 ${devdir}/php/app/views/" escape="false" passthru="true" />
+
+        <echo msg="Reload the web server" />
+
+        <exec command="sudo /etc/init.d/nginx reload" passthru="true"/>
+    </target>
+
+    <target name="prod">
+        <!--
+        <svncopy
+                svnpath             = "${svnpath}"
+                username            = "${username}"
+                password            = "${password}"
+                nocache             = "true"
+                repositoryurl       = "${trunk}"
+                todir               = "${tags}groundfunding.nl-${version}"
+                message             = "tagging version ${version}"/>
+        -->
+        <delete dir="${proddir}" includeemptydirs="true" verbose="true" failonerror="true" quiet="true"/>
+
+        <mkdir dir="${proddir}" />
+
+        <copy todir="${proddir}" includeemptydirs="true">
+            <fileset dir="./php">
+                <include name="**" />
+            </fileset>
+        </copy>
+
+        <copy file="./configs/prod.config.php" tofile="${proddir}/app/config/config.php" overwrite="true">
+            <filterchain>
+                <replaceregexp>
+                    <regexp pattern="namedb" replace="${dbname}" />
+                    <regexp pattern="dbhost" replace="${dbhost}" />
+                    <regexp pattern="dbuser" replace="${dbuser}" />
+                    <regexp pattern="dbpass" replace="${dbpass}" />
+
+                    <regexp pattern="JENKINS_SYSTEM_VERSION" replace="${version}" />
+                </replaceregexp>
+            </filterchain>
+        </copy>
+
+        <exec command="chmod -R 0777 ${proddir}/app/views/" escape="false" passthru="true" />
+
+        <taskdef name="dbdeploy" classname="phing.tasks.ext.dbdeploy.DbDeployTask"/>
+
+        <dbdeploy
+                url="mysql:host=${dbhost};dbname=${dbname}"
+                userid="${dbuser}"
+                password="${dbpass}"
+                dir="./database/"
+                outputfile="${proddir}/all-db.sql"
+                undooutputfile="${proddir}/undo-all-db.sql"
+                />
+
+        <zip destfile="${proddir}/../groundfunding.nl-${version}.zip" basedir="${proddir}"/>
+
+        <delete dir="${proddir}" includeemptydirs="true" verbose="true" failonerror="true" quiet="true"/>
+
+    </target>
+
+    </project>

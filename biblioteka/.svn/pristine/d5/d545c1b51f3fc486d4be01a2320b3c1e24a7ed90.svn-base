@@ -1,0 +1,88 @@
+<?php
+
+
+class IndexController extends ControllerBase
+{
+	public function indexAction()
+	{
+		$projects = new Projects();
+
+
+        //$projects = $projects :: find(array("order" => "projekt_id"));
+
+        //foreach($projects AS $key=>$value){
+
+           // $projects[$key]->projekt_time = Globals::differenceDateDays($projects[$key]->projekt_time);
+
+           // echo Debug::Dump($projects[0]);
+
+
+
+       // }
+
+        //exit;
+
+        $this->view->projects = $projects;
+	}
+
+	public function detailAction()
+	{
+		$this->view->setLayout('main2');
+
+		$projects = new Projects();
+
+		$data = $projects->findFirst(array(
+			"projekt_link = :link:",
+			"bind" => array('link' => $this->dispatcher->getParam("link"))
+		));
+
+		if ($data == true) {
+
+			$transactions = new Transactions();
+			$users = new Users();
+
+			$data->total = $transactions->sum(array(
+				"column" => "transaction_amount",
+				"conditions" => "transaction_project_id = '".$data->projekt_id."'"
+			));
+
+			$data->total = $data->total!= "" ? $data->total : 0;
+
+			$data->investors = $transactions->count("transaction_project_id = '".$data->projekt_id."'");
+
+			$data->percent = round(($data->total/$data->projekt_price) * 100, 0);
+
+		/*	$datetime1 = new DateTime("now");
+			$datetime2 = new DateTime(date("Y-m-d", strtotime($data->projekt_time. "+ 1 day?")));
+			$interval = $datetime1->diff($datetime2);
+        */
+
+
+			$data->projekt_time = Globals::differenceDateDays($data->projekt_time);
+
+			$transactionsList = $transactions :: find(array("transaction_project_id = ".$data->projekt_id));
+
+			foreach($transactionsList AS $key=>$val){
+
+                $user = $users :: findFirst(array(
+					"user_id = :user_id:",
+					"bind" => array('user_id' => $val->transaction_user_id)
+				));
+
+				$row[$key] = $transactionsList[$key]->toArray();
+				$row[$key]['user_email'] = $user->user_email;
+
+			}
+
+			$this->view->setVar("rows", $row);
+
+			$this->view->project = $data;
+
+		} else {
+
+			return $this->response->redirect();
+
+		}
+	}
+}
+

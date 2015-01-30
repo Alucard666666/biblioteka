@@ -1,0 +1,26 @@
+<?php
+
+class ContentController extends ControllerBase
+{
+    public function initialize(){
+        parent::initialize();
+    }
+
+    public function indexAction(){
+
+		$content = Content::findFirst(
+            array(
+                "content_link = :link:",
+                "bind" => array('link' => $this->dispatcher->getParam("link"))
+    	    )
+        );
+
+        $this->tag->setTitle("groundfunding.nl - ".$content->content_meta_title);
+
+        if ($content == FALSE)
+            Elements::error_page();
+
+    	$this->view->content = $content;
+	}
+}
+

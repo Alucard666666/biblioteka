@@ -1,0 +1,36 @@
+<?php
+
+class Documents extends \Phalcon\Mvc\Model
+{
+
+    /**
+     *
+     * @var integer
+     */
+    public $document_id;
+
+    /**
+     *
+     * @var string
+     */
+    public $document_title;
+
+    /**
+     *
+     * @var string
+     */
+    public $document_link;
+
+    /**
+     *
+     * @var integer
+     */
+    public $document_size;
+
+    /**
+     *
+     * @var string
+     */
+    public $document_date;
+
+}

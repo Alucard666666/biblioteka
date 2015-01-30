@@ -1,0 +1,83 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+        <div class="row">
+            <div class="col-lg-10">
+                <h3 class="panel-title"><strong><?php echo $project->projekt_title; ?></strong></h3>
+            </div>
+
+            <div class="col-lg-2 text-right">
+                <a data-toggle="modal" href="/ajax/transactie/<?php echo $project->projekt_id; ?>" class="btn btn-warning btn-xs" data-target="#"><strong>Add payment</strong></a>
+            </div>
+        </div>
+	</div>
+	<div class="panel-body">
+
+        <?php $rand = rand(0, 100); ?>
+
+        <div class="row">
+            <div class="col-lg-9">
+                <h5>Risicocategorie: <?php echo $project->projekt_category; ?></h5>
+                <h5><strong>Project is volgeschreven</strong></h5>
+            </div>
+            <div class="col-lg-3 text-right">
+                <h4><span class="label label-primary"><?php echo $project->projekt_time; ?> DAGEN OVER</span></h4>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h5>Doel</h5>
+                        <h5>&euro; <?php echo $project->total; ?></h5>
+                    </div>
+                    <div class="col-lg-6">
+
+                        <h5>Huiding</h5>
+                        <h5>&euro; <?php echo $project->projekt_price; ?></h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="<?php echo $project->percent; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $project->percent ?>%">
+                        <?php echo $project->percent; ?>%
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <h5><span class="label label-primary">INVESTER</span> <strong><?php echo $project->investors; ?></strong> INVESTEERDERS</h5>
+            </div>
+
+            <div class="col-lg-12" style="margin-top: 20px;">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="active"><a href="#description" role="tab" data-toggle="tab">Description</a></li>
+                    <li><a href="#profit" role="tab" data-toggle="tab">Profit</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="description"><p><?php echo $project->projekt_description; ?></p></div>
+                    <div class="tab-pane" id="profit">
+                        <div style="margin-top: 20px;">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed justo turpis, vulputate in mi molestie, aliquet lacinia urna. Ut nec ligula eu neque pretium pretium et at nisl.</p>
+                        <hr>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed justo turpis, vulputate in mi molestie, aliquet lacinia urna. Ut nec ligula eu neque pretium pretium et at nisl.</p>
+                        <hr>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed justo turpis, vulputate in mi molestie, aliquet lacinia urna. Ut nec ligula eu neque pretium pretium et at nisl.</p>
+                        <hr>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed justo turpis, vulputate in mi molestie, aliquet lacinia urna. Ut nec ligula eu neque pretium pretium et at nisl.</p>
+                        <hr>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed justo turpis, vulputate in mi molestie, aliquet lacinia urna. Ut nec ligula eu neque pretium pretium et at nisl.</p>
+                        <hr>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+
+<script type="text/javascript">
+$('#myTab a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+</script>

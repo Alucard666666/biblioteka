@@ -1,0 +1,7 @@
+<div class="col-lg-8">
+	<h3 class="text-primary">{{ news.news_title }}</h3>
+</div>
+<div class="col-lg-4 text-right" style="padding-top: 20px;">
+	<small class="text-muted">{{ news.news_date }}</small>
+</div>
+<div class="col-lg-12">{{ news.news_text }}</div>

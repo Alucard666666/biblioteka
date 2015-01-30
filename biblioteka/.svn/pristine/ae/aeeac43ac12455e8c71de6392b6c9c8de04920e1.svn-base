@@ -1,0 +1,76 @@
+<?php echo $this->tag->form(array('users/register', 'method' => 'post', 'class' => 'form-horizontal')); ?>
+    <div class="col-lg-12">
+        <div class="page-header">
+            <h3>Join <span class="text-primary">us</span>!</h3>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <?php echo $this->getContent(); ?>
+    </div>
+    <div class="col-lg-11">
+        <div class="form-group">
+            <label for="tussenvoegsel" class="col-sm-3 control-label">Name</label>
+            <div class="col-sm-9<?php if (isset($error['user_name'])) { ?> has-error<?php } ?>">
+                <?php echo $this->tag->textfield(array('user_name', 'class' => 'form-control')); ?>
+                <?php if (isset($error['user_name'])) { ?><span class="help-block"><?php echo $error['user_name']; ?></span><?php } ?>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="email" class="col-sm-3 control-label">Email</label>
+            <div class="col-sm-9<?php if (isset($error['user_email'])) { ?> has-error<?php } ?>">
+                <?php echo $this->tag->textfield(array('user_email', 'class' => 'form-control')); ?>
+                <?php if (isset($error['user_email'])) { ?><span class="help-block"><?php echo $error['user_email']; ?></span><?php } ?>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="email" class="col-sm-3 control-label">Password</label>
+            <div class="col-sm-9<?php if (isset($error['user_password'])) { ?> has-error<?php } ?>">
+                <?php echo $this->tag->textfield(array('user_password', 'class' => 'form-control')); ?>
+                <?php if (isset($error['user_password'])) { ?><span class="help-block"><?php echo $error['user_password']; ?></span><?php } ?>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="email" class="col-sm-3 control-label">Confirm password</label>
+            <div class="col-sm-9<?php if (isset($error['confirm_password'])) { ?> has-error<?php } ?>">
+                <?php echo $this->tag->textfield(array('confirm_password', 'class' => 'form-control')); ?>
+                <?php if (isset($error['confirm_password'])) { ?><span class="help-block"><?php echo $error['confirm_password']; ?></span><?php } ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="straat" class="col-sm-3 control-label">Straat en Huisnr.</label>
+            <div class="col-sm-6<?php if (isset($error['user_street'])) { ?> has-error<?php } ?>">
+                <?php echo $this->tag->textfield(array('user_street', 'class' => 'form-control')); ?>
+            </div>
+            <label for="email" class="col-sm-1 control-label">Nr</label>
+            <div class="col-sm-2<?php if (isset($error['user_house'])) { ?> has-error<?php } ?>">
+                <?php echo $this->tag->textfield(array('user_house', 'class' => 'form-control')); ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="postcode" class="col-sm-3 control-label">Postcode</label>
+            <div class="col-sm-3<?php if (isset($error['user_postcode'])) { ?> has-error<?php } ?>">
+                <?php echo $this->tag->textfield(array('user_postcode', 'class' => 'form-control')); ?>
+                <?php if (isset($error['user_postcode'])) { ?><span class="help-block"><?php echo $error['user_postcode']; ?></span><?php } ?>
+            </div>
+            <label for="plaats" class="col-sm-1 control-label">Plaats</label>
+            <div class="col-sm-5<?php if (isset($error['user_city'])) { ?> has-error<?php } ?>">
+                <?php echo $this->tag->textfield(array('user_city', 'class' => 'form-control')); ?>
+            </div>
+        </div>
+        <div class="form-group" >
+            <label for="telefoonnummer" class="col-sm-3 control-label">Telefoonnummer</label>
+            <div class="col-sm-9<?php if (isset($error['user_phone'])) { ?> has-error<?php } ?>">
+                <?php echo $this->tag->textfield(array('user_phone', 'class' => 'form-control')); ?>
+                <?php if (isset($error['user_phone'])) { ?><span class="help-block"><?php echo $error['user_phone']; ?></span><?php } ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-9 col-sm-offset-3">
+                <?php echo $this->tag->submitButton(array('Register', 'class' => 'btn btn-primary')); ?>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,76 @@
+<?php
+
+use Phalcon\Forms\Element\Text,
+    Phalcon\Validation\Validator,
+    Phalcon\Forms\Form,
+    Phalcon\Validation\ValidatorInterface,
+    Phalcon\Validation\Validator\PresenceOf,
+    Phalcon\Validation\Validator\Email,
+    Phalcon\Validation\Validator\StringLength,
+    Phalcon\Validation\Validator\Regex as RegexValidator,
+    Phalcon\Validation\Validator\Between;
+use Phalcon\Validation\Validator\Confirmation;
+
+class ProfileController extends ControllerBase
+{
+
+    public function indexAction()
+    {
+
+    }
+
+	public function saveAction()
+	{
+		$user = new Users();
+
+
+        if($this->request->isPost() == true){
+
+        //	$user = $user->findFirst($this->session->get("user_id"));
+            $user = $user->findFirst(1);
+
+            $validation = new Phalcon\Validation();
+
+            $validation->add('password', new Confirmation(array(
+                'message' => 'Password doesn\'t match confirmation',
+                'with' => 'new_password'
+            )));
+
+            $messages = $validation->validate($_POST);
+
+
+            if (count($messages) > 0) {
+
+
+
+                foreach ($messages as $message) {
+                    $error[$message->getField()] = $message;
+                }
+
+                $this->view->setVars(array("error" => $error));
+
+
+            } else {
+
+
+
+                $user->user_data = serialize($this->request->getPost("data"));
+
+                $success = $user->save();
+
+                //	$this->flash->success($user->update(array("user_id"=>$this->session->get("user_id"))));
+
+                if ($success) {
+                    echo "Thanks for registering!";
+                }
+
+            }
+
+        }
+
+		//$this->view->disable();
+	}
+
+}
+
+

@@ -1,0 +1,149 @@
+{{ content() }}
+<div class="panel panel-primary">
+	<div class="panel-heading">
+        <div class="row">
+            <div class="col-lg-10">
+                <h3 class="panel-title"><strong>{{ project.project_title }}</strong></h3>
+            </div>
+
+            {% if session.get('user') %}
+            <div class="col-lg-2 text-right">
+                <a data-toggle="modal" href="/ajax/transactie/{{ project.project_id }}" class="btn btn-warning btn-xs" data-target="#"><strong>Add payment</strong></a>
+            </div>
+            {% endif %}
+        </div>
+	</div>
+	<div class="panel-body">
+        <div class="row">
+            <div class="col-lg-9">
+                <h5>Risicocategorie: {{ project.project_category }}</h5>
+                <h5><strong>Project is volgeschreven</strong></h5>
+            </div>
+            <div class="col-lg-3 text-right">
+                <h4>{% if elements.differenceDateDays(project.project_valid_until) > 0 %}<span class="label label-primary">{{ elements.differenceDateDays(project.project_valid_until) }} DAGEN OVER{% else %}<span class="label label-danger">Valid until midnight{% endif %}</span></h4>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h5>Doel</h5>
+                        <h5>&euro; {{ project.getTotalAmount() }}</h5>
+                    </div>
+                    <div class="col-lg-6">
+
+                        <h5>Huiding</h5>
+                        <h5>&euro; {{ project.project_price }}</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="{{ project.getProjectPercent() }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ project.getProjectPercent() }}%">
+                        {{ project.getProjectPercent() }}%
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <h5><span class="label label-primary">INVESTER</span> <strong>{{ project.transactions|length }}</strong> INVESTEERDERS</h5>
+            </div>
+
+            <div class="col-lg-12" style="margin-top: 20px;">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="active"><a href="#description" role="tab" data-toggle="tab">Description</a></li>
+                    <li><a href="#profit" role="tab" data-toggle="tab">Profit</a></li>
+                    <li><a href="#comments" role="tab" data-toggle="tab">Comments</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="description"><p>{{ project.project_description }}</p></div>
+                    <div class="tab-pane" id="profit">
+                        <div style="margin-top: 20px;">
+                            {% for gift in project.gifts %}
+                                <div class="well">
+                                    <h4 class="page-header" style="margin-top: 0;"><strong>Gift for &euro; {{ elements.formatCurrency(gift.gift_amount) }} or more</strong></h4>
+                                    <p>{{ gift.gift_description }}</p>
+                                </div>
+
+                                {% if not loop.last %}<hr />{% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="comments">
+                        {% if project.comments|length > 0 %}
+                            {% for comment in project.comments %}
+                            <div class="col-xs-12 col-sm-12">
+                                <div class="panel panel-google-plus" style="box-shadow: none;">
+                                    <div class="dropdown">
+                                        <span class="dropdown-toggle" type="button" data-toggle="dropdown">
+                                            <span class="glyphicon glyphicon-chevron-down"></span>
+                                        </span>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+                                            <li role="presentation" class="divider"></li>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="panel-heading">
+                                        <img class="img-circle pull-left" src="https://lh3.googleusercontent.com/-CxXg7_7ylq4/AAAAAAAAAAI/AAAAAAAAAQ8/LhCIKQC5Aq4/s46-c-k-no/photo.jpg" alt="Mouse0270" />
+                                        <h3>{{ comment.users.user_name }}</h3>
+                                        <h5><span>Shared publicly</span> - <span>{{ date('d-m-Y H:i', elements.strtotime(comment.comment_date)) }}</span> </h5>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p>{{ comment.comment_text }}</p>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <button type="button" class="btn btn-default">+1</button>
+                                        <button type="button" class="btn btn-default">-1</button>
+                                        {% if session.get("user") %}
+                                            {{ form('method': 'post') }}
+                                            <div class="input-group">
+                                                <span class="input-group-btn">
+                                                    <button type="submit" class="btn btn-default">
+                                                        <span class="glyphicon glyphicon-share-alt"></span>
+                                                    </button>
+                                                </span>
+                                                {{ hidden_field("comment_reply_to_user_id", "value":comment.users.user_id) }}
+                                                {{ text_field("comment_text", "class":"form-control", "placeholder":"Add a comment...") }}
+                                            </div>
+                                            {{ end_form() }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <hr />
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <h3 class="text-center">No comments</h3>
+                        {% endif %}
+
+                        <div class="col-xs-12 col-sm-12">
+                            <div class="row">
+                                {% if session.get("user") %}
+                                    {{ form('method': 'post') }}
+                                        <div class="col-lg-8">
+                                            <h4>Add comment:</h4>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <span class="text-muted pull-right"><span class="sign-count">0</span>/250</span>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            {{ text_area("comment_text", "class":"form-control comment-box", "placeholder": "Message...") }}
+                                            <br />
+                                            {{ submit_button("Add comment", "class":"btn btn-primary") }}
+                                        </div>
+                                    {{ end_form() }}
+                                {% else %}
+                                    <div class="col-lg-12 text-center">
+                                        <h4>You must be logged</h4>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>

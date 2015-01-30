@@ -1,0 +1,8 @@
+<!-- PAGE FOOTER -->
+<div class="page-footer">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
+            <span class="txt-color-white">Biblilioteka - Projekt i wykonanie Adrian Mosur & Konrad Pabijan © 2015</span>
+        </div>
+    </div>
+</div>

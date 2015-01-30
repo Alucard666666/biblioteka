@@ -1,0 +1,93 @@
+
+
+<?php echo $this->tag->form(array("contact/validate", "method" => "post", "class" => "form-horizontal" )) ?>
+
+	<div class="col-lg-12">
+		<div class="page-header">
+			<h4>Contact with <span class="text-primary">us</span>!</h4>
+		</div>
+	</div>
+	<div class="col-lg-11">
+
+		<div class="form-group <?php if($error['tussenvoegsel'] || $error['voorletters']) echo "has-error"; ?>">
+		    <label for="email" class="col-sm-3 control-label">Tussenvoegsel</label>
+		    <div class="col-sm-4 ">
+			    <?php echo $this->tag->textField(array("tussenvoegsel", "class" => "form-control")); ?>
+			 	<?php if($error['tussenvoegsel']) echo '<span class="help-block">'.$error['tussenvoegsel'].'</span>'; ?>
+			</div>
+			<label for="email" class="col-sm-2 control-label">Voorletters</label>
+		    <div class="col-sm-3">
+			    <?php echo $this->tag->textField(array("voorletters", "class" => "form-control")); ?>
+			 	<?php if($error['voorletters']) echo '<span class="help-block">'.$error['voorletters'].'</span>'; ?>
+			</div>
+		</div>
+
+		<div class="form-group <?php if($error['achternaam']) echo "has-error"; ?>" >
+			<label for="password" class="col-sm-3 control-label">Achternaam</label>
+			<div class="col-sm-9">
+			    <?php echo $this->tag->textField(array("achternaam", "class" => "form-control")); ?>
+			 	<?php if($error['achternaam']) echo '<span class="help-block">'.$error['achternaam'].'</span>'; ?>
+			</div>
+		</div>
+		<div class="form-group <?php if($error['straat'] || $error['nr']) echo "has-error"; ?>">
+		    <label for="email" class="col-sm-3 control-label">Straat en Huisnr.</label>
+		    <div class="col-sm-6 ">
+			    <?php echo $this->tag->textField(array("straat", "class" => "form-control")); ?>
+			 	<?php if($error['straat']) echo '<span class="help-block">'.$error['straat'].'</span>'; ?>
+			</div>
+			<label for="email" class="col-sm-1 control-label">Nr</label>
+		    <div class="col-sm-2">
+			    <?php echo $this->tag->textField(array("nr", "class" => "form-control")); ?>
+			 	<?php if($error['nr']) echo '<span class="help-block">'.$error['nr'].'</span>'; ?>
+			</div>
+		</div>
+		<div class="form-group  <?php if($error['postcode'] || $error['plaats']) echo "has-error"; ?>" >
+			<label for="password" class="col-sm-3 control-label">Postcode</label>
+			<div class="col-sm-3">
+			    <?php echo $this->tag->textField(array("postcode", "class" => "form-control")); ?>
+			 	<?php if($error['postcode']) echo '<span class="help-block">'.$error['postcode'].'</span>'; ?>
+			</div>
+			<label for="password" class="col-sm-1 control-label">Plaats</label>
+			<div class="col-sm-5">
+			    <?php echo $this->tag->textField(array("plaats", "class" => "form-control")); ?>
+			 	<?php if($error['plaats']) echo '<span class="help-block">'.$error['plaats'].'</span>'; ?>
+			</div>
+		</div>
+		<div class="form-group  <?php if($error['telefoonnummer']) echo "has-error"; ?>" >
+			<label for="password" class="col-sm-3 control-label">Telefoonnummer</label>
+			<div class="col-sm-9">
+				<?php echo $this->tag->textField(array("telefoonnummer", "class" => "form-control")); ?>
+			 	<?php if($error['telefoonnummer']) echo '<span class="help-block">'.$error['telefoonnummer'].'</span>'; ?>
+			</div>
+		</div>
+		<div class="form-group <?php if($error['email']) echo "has-error"; ?>">
+			<label for="password" class="col-sm-3 control-label">Email</label>
+			<div class="col-sm-9">
+			    <?php echo $this->tag->textField(array("email", "class" => "form-control")); ?>
+			 	<?php if($error['email']) echo '<span class="help-block">'.$error['email'].'</span>'; ?>
+			</div>
+		</div>
+		<div class="form-group" >
+			<label for="password" class="col-sm-3 control-label">Reden voor afspraak</label>
+			<div class="col-sm-9">
+			    <?php echo $this->tag->selectStatic(array("reden", "class" => "form-control"), array("kies reden" => "Kies reden", "orienteren" => "oriënteren", "woning op het oog" => "Woning op het oog", "woning gekocht" => "Woning gekocht", "hypotheek aflossen met grondwaarde" => "Hypotheek aflossen met grondwaarde", "grondwaarde liquide maken" => "Grondwaarde liquide maken", "Einde rentevaste periode" => "Einde rentevaste periode")); ?>
+			</div>
+		</div>
+
+
+		<div class="form-group <?php if($error['text']) echo "has-error"; ?>">
+			<label for="password" class="col-sm-3 control-label">Text</label>
+			<div class="col-sm-9">
+			    <?php echo $this->tag-> textArea (array("text",  "rows" => 4, "class" => "form-control")); ?>
+			 	<?php if($error['text']) echo '<span class="help-block">'.$error['text'].'</span>'; ?>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-9 col-sm-offset-3">
+			    <?php echo $this->tag->submitButton(array("Send Message", "class"=>"btn btn-primary")); ?>
+			</div>
+		</div>
+
+	</div>
+
+<?php echo $this->tag->endForm() ?>

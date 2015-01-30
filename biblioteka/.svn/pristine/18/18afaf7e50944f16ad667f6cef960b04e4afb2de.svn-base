@@ -1,0 +1,76 @@
+<?php
+
+use Phalcon\Mvc\Model\Resultset\Simple as Resultset;
+use Phalcon\Mvc\ModelInterface;
+
+class Projects extends Phalcon\Mvc\Model
+{
+    /**
+     *
+     * @var integer
+     */
+    public $project_id;
+
+    /**
+     *
+     * @var string
+     */
+    public $project_title;
+
+    /**
+     *
+     * @var string
+     */
+    public $project_description;
+
+    /**
+     *
+     * @var string
+     */
+    public $project_image;
+
+    /**
+     *
+     * @var string
+     */
+    public $project_riskcategory;
+
+    /**
+     *
+     * @var double
+     */
+    public $project_price;
+
+    /**
+     *
+     * @var integer
+     */
+    public $project_valid_until;
+
+    /**
+     *
+     * @var string
+     */
+    public $project_link;
+
+    public function initialize()
+    {
+        $this->hasMany("project_id", "Transactions", "transaction_project_id");
+        $this->hasMany("project_id", "Gifts", "gift_project_id");
+        $this->hasMany("project_id", "Comments", "comment_project_id");
+    }
+
+    public function getTotalAmount()
+    {
+        $sum = 0;
+        foreach($this->transactions AS $value)
+            $sum += $value->transaction_amount;
+
+        return $sum;
+    }
+
+    public function getProjectPercent()
+    {
+        return round(($this->getTotalAmount()/$this->project_price) * 100, 0);
+    }
+}

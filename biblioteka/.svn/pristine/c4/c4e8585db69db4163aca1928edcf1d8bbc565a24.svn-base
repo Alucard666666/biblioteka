@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <?php echo $this->partial('parts/header'); ?>
+</head>
+<body>
+
+<div class="container">
+
+    <?php echo $this->partial('parts/top'); ?>
+
+	<div class="row">
+		<div class="col-lg-12">
+			<?php echo $this->getContent(); ?>
+		</div>
+	</div>
+</div>
+
+<?php echo $this->partial('parts/footer'); ?>
+
+</body>
+</html>

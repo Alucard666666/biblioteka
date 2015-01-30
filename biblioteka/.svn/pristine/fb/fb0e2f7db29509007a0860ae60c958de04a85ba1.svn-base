@@ -1,0 +1,129 @@
+{{ form("register", "method" : "post", "class" : "form-horizontal") }}
+    <div class="col-lg-12">
+        <div class="page-header">
+            <h3>Join <span class="text-primary">us</span>!</h3>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        {{ content() }}
+    </div>
+    <div class="col-lg-11">
+        <div class="form-group">
+            <label for="tussenvoegsel" class="col-sm-3 control-label">Name*</label>
+            <div class="col-sm-9{% if error['user_name'] is defined %} has-error{% endif %}">
+                {{ textField(["user_name", "class" : "form-control"]) }}
+                {% if error['user_name'] is defined %}<span class="help-block">{{ error['user_name'] }}</span>{% endif %}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="email" class="col-sm-3 control-label">Email*</label>
+            <div class="col-sm-9{% if error['user_email'] is defined %} has-error{% endif %}">
+                {{ textField(["user_email", "class" : "form-control"]) }}
+                {% if error['user_email'] is defined %}<span class="help-block">{{ error['user_email'] }}</span>{% endif %}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="email" class="col-sm-3 control-label">Password*</label>
+            <div class="col-sm-9{% if error['user_password'] is defined %} has-error{% endif %}">
+                {{ passwordField(["user_password", "class" : "form-control"]) }}
+                {% if error['user_password'] is defined %}<span class="help-block">{{ error['user_password'] }}</span>{% endif %}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="email" class="col-sm-3 control-label">Confirm password*</label>
+            <div class="col-sm-9{% if error['confirm_password'] is defined %} has-error{% endif %}">
+                {{ passwordField(["confirm_password", "class" : "form-control"]) }}
+                {% if error['confirm_password'] is defined %}<span class="help-block">{{ error['confirm_password'] }}</span>{% endif %}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="straat" class="col-sm-3 control-label">Straat*</label>
+            <div class="col-sm-6{% if error['user_street'] is defined %} has-error{% endif %}">
+                {{ textField(["user_street", "class" : "form-control"]) }}
+                {% if error['user_street'] is defined %}<span class="help-block">{{ error['user_street'] }}</span>{% endif %}
+            </div>
+            <label for="email" class="col-sm-1 control-label">Nr*</label>
+            <div class="col-sm-2{% if error['user_house'] is defined %} has-error{% endif %}">
+                {{ textField(["user_house", "class" : "form-control"]) }}
+                {% if error['user_house'] is defined %}<span class="help-block">{{ error['user_house'] }}</span>{% endif %}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="postcode" class="col-sm-3 control-label">Postcode*</label>
+            <div class="col-sm-3{% if error['user_postcode'] is defined %} has-error{% endif %}">
+                {{ textField(["user_postcode", "class" : "form-control postcode upper-text"]) }}
+                {% if error['user_postcode'] is defined %}<span class="help-block">{{ error['user_postcode'] }}</span>{% endif %}
+            </div>
+            <label for="plaats" class="col-sm-1 control-label">Plaats*</label>
+            <div class="col-sm-5{% if error['user_city'] is defined %} has-error{% endif %}">
+                {{ textField(["user_city", "class" : "form-control"]) }}
+                {% if error['user_city'] is defined %}<span class="help-block">{{ error['user_city'] }}</span>{% endif %}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="postcode" class="col-sm-3 control-label">Birth city*</label>
+            <div class="col-sm-4{% if error['user_birth_city'] is defined %} has-error{% endif %}">
+                {{ textField(["user_birth_city", "class" : "form-control"]) }}
+                {% if error['user_birth_city'] is defined %}<span class="help-block">{{ error['user_birth_city'] }}</span>{% endif %}
+            </div>
+            <label for="plaats" class="col-sm-2 control-label">Birth date*</label>
+            <div class="col-sm-3{% if error['user_birth_date'] is defined %} has-error{% endif %}">
+                <div class='input-group birthdate'>
+                    {{ textField(["user_birth_date", "class" : "form-control date"]) }}
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+
+                {% if error['user_birth_date'] is defined %}<span class="help-block">{{ error['user_birth_date'] }}</span>{% endif %}
+            </div>
+        </div>
+
+        <div class="form-group" >
+            <label for="telefoonnummer" class="col-sm-3 control-label">Telefoonnummer</label>
+            <div class="col-sm-9{% if error['user_phone'] is defined %} has-error{% endif %}">
+                {{ textField(["user_phone", "class" : "form-control"]) }}
+                {% if error['user_phone'] is defined %}<span class="help-block">{{ error['user_phone'] }}</span>{% endif %}
+            </div>
+        </div>
+
+        <div class="form-group" >
+            <label for="telefoonnummer" class="col-sm-3 control-label">Mobiele telefoonnummer</label>
+            <div class="col-sm-9{% if error['user_mobile'] is defined %} has-error{% endif %}">
+                {{ textField(["user_mobile", "class" : "form-control"]) }}
+                {% if error['user_mobile'] is defined %}<span class="help-block">{{ error['user_mobile'] }}</span>{% endif %}
+            </div>
+        </div>
+
+        <div class="form-group" >
+            <label for="telefoonnummer" class="col-sm-3 control-label">WWW</label>
+            <div class="col-sm-9{% if error['user_www'] is defined %} has-error{% endif %}">
+                {{ textField(["user_www", "class" : "form-control"]) }}
+                {% if error['user_www'] is defined %}<span class="help-block">{{ error['user_www'] }}</span>{% endif %}
+            </div>
+        </div>
+
+        <div class="form-group" >
+            <label for="telefoonnummer" class="col-sm-3 control-label">FAX</label>
+            <div class="col-sm-9{% if error['user_fax'] is defined %} has-error{% endif %}">
+                {{ textField(["user_fax", "class" : "form-control"]) }}
+                {% if error['user_fax'] is defined %}<span class="help-block">{{ error['user_fax'] }}</span>{% endif %}
+            </div>
+        </div>
+
+        <div class="form-group" >
+            <label for="telefoonnummer" class="col-sm-3 control-label">Account number*</label>
+            <div class="col-sm-9{% if error['user_account_number'] is defined %} has-error{% endif %}">
+                {{ textField(["user_account_number", "class" : "form-control"]) }}
+                {% if error['user_account_number'] is defined %}<span class="help-block">{{ error['user_account_number'] }}</span>{% endif %}
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-9 col-sm-offset-3">
+                {{ submit_button("Register", "class":"btn btn-primary") }}
+            </div>
+        </div>
+    </div>
+</form>

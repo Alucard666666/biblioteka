@@ -1,0 +1,19 @@
+<?php if ($news->items) { ?>
+    <?php foreach ($news->items as $item) { ?>
+        <div class="media">
+            <div class="media-body">
+                <p class="text-muted text-right"><small><?php echo date('d-m-Y', $this->elements->strtotime($item->news_date)); ?></small></p>
+                <h4 class="media-heading"><?php echo $item->news_title; ?></h4>
+                <p><?php echo $this->elements->news_shortcut(strip_tags($item->news_text), 400); ?></p>
+
+                <a href="/news/read/<?php echo $item->news_link; ?>" class="btn btn-warning pull-right btn-xs" style="margin-top: 20px;">Show news</a>
+            </div>
+        </div>
+        <hr />
+    <?php } ?>
+
+    <?php echo $this->elements->navigation($news, 'news'); ?>
+
+<?php } else { ?>
+    <h3 class="text-center">No news</h3>
+<?php } ?>

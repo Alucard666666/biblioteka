@@ -1,0 +1,41 @@
+<?php
+
+
+
+
+class Users extends \Phalcon\Mvc\Model
+{
+
+    /**
+     *
+     * @var integer
+     */
+    public $user_id;
+
+    /**
+     *
+     * @var string
+     */
+    public $user_email;
+
+    /**
+     *
+     * @var string
+     */
+    public $user_password;
+
+    /**
+     *
+     * @var string
+     */
+    public $user_data;
+
+    /**
+     *
+     * @var string
+     */
+    public $user_active;
+
+
+
+}

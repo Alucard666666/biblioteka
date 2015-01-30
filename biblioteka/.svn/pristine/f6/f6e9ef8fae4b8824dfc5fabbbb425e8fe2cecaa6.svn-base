@@ -1,0 +1,96 @@
+<?php
+
+use Phalcon\Mvc\Model\Validator\InclusionIn,
+    Phalcon\Mvc\Model\Validator\Uniqueness;
+use Phalcon\Mvc\Model\Validator\PresenceOf,
+    Phalcon\Mvc\Model\Validator\Email as EmailValidator,
+    Phalcon\Mvc\Model\Validator\Regex as RegexValidator;
+use Phalcon\Mvc\Model\Validator\StringLength  as StringLength;
+
+
+
+class Users extends \Phalcon\Mvc\Model
+{
+    /**
+     *
+     * @var integer
+     */
+    public $user_id;
+
+    /**
+     *
+     * @var string
+     */
+    public $user_name;
+
+    /**
+     *
+     * @var string
+     */
+    public $user_email;
+
+    /**
+     *
+     * @var string
+     */
+    public $user_password;
+
+    /**
+     *
+     * @var string
+     */
+    public $user_active;
+
+    /**
+     *
+     * @var integer
+     */
+    public $user_token;
+
+    /**
+     *
+     * @var date
+     */
+    public $user_date;
+
+    public function initialize()
+    {
+        $this->skipAttributes(array('user_date'));
+        $this->skipAttributesOnCreate(array('user_active', 'user_data'));
+
+        $this->hasMany("user_id", "Transactions", "transaction_user_id");
+    }
+
+    public function validation()
+    {
+        $this->validate(new Uniqueness(array(
+            "field" => "user_email",
+            "message" => "E-mail name must be unique"
+        )));
+
+        if ($this->validationHasFailed() == true) {
+            return false;
+        }
+    }
+
+    public function beforeValidationOnCreate()
+    {
+        $this->user_token = sha1(md5($this->user_email.rand(1,100)));
+    }
+
+    public function afterCreate()
+    {
+        $mail = new PHPMailer();
+
+        $mail->SetFrom("no-reply@groundfunding.nl",  "no-reply");
+        $mail->AddAddress($this->user_email, $this->user_name);
+        $mail->Subject = "Confirm account";
+        $mail->AltBody = "To view the message, please use an HTML compatible email viewer!";
+
+        $body = "<a href='http://groundfunding.localhost/users/confirm/" . $this->user_token ."'>Click</a>";
+
+        $mail->MsgHTML($body);
+
+        if($mail->send()) unset($_POST);
+    }
+}

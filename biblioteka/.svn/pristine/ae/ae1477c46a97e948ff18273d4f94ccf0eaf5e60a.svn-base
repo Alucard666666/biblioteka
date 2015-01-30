@@ -1,0 +1,7 @@
+<div class="col-lg-12">
+	<h3 class="page-header text-primary"><?php echo $content->content_title; ?></h3>
+</div>
+
+<div class="col-lg-12">
+	<?php echo $content->content_text; ?>
+</div>

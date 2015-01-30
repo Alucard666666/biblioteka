@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {{ partial("parts/header") }}
+</head>
+<body>
+
+<div class="container">
+
+    {{ partial("parts/top") }}
+
+	<div class="row">
+		<div class="col-lg-8">
+			{{ content() }}
+		</div>
+		<div class="col-lg-4">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title"><strong>Kunnen wij u helpen?</strong></h3>
+				</div>
+				<div class="panel-body">
+					<div class="media">
+						<span class="pull-left">
+							{{ image("http://www.yellowmile.com.tr/images_up/adsfadf.jpg", "alt" : "banner", "style" : "max-width: 50px;", "class" : "media-object img-circle img-responsive") }}
+						</span>
+						<div class="media-body" style="padding-top: 8px; padding-left: 20px;">
+                            {{ linkTo(["contact", "Stel hier uw vraag aan Astrid <i class='glyphicon glyphicon-play'></i>", "class":"btn btn-default"]) }}
+                        </div>
+					</div>
+				</div>
+			</div>
+
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title"><strong>Transacties</strong></h3>
+				</div>
+				<div class="panel-body{% if project.transactions|length == 0 %} text-center{% endif %}">
+                    {% if project.transactions|length > 0 %}
+                        {% for transaction in project.transactions %}
+                            <div class="media">
+                                <span class="pull-left">
+                                    {{ image("http://icons.iconarchive.com/icons/artua/dragon-soft/512/User-icon.png", "alt" : "...", "style" : "max-width: 50px;", "class" : "media-object img-responsive") }}
+                                </span>
+                                <div class="media-body" style="padding-top: 8px; padding-left: 20px;">
+                                    <p>{{ transaction.users.user_email }}</p>
+                                    <h5><strong>Amount: <span  class="text-danger">&euro; {{ transaction.transaction_amount }}</span></strong></h5>
+                                </div>
+                            </div>
+
+                            {% if not loop.last %}<hr />{% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <span class="text-danger">No transacties</span>
+                    {% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{ partial("parts/footer") }}
+
+</body>
+</html>

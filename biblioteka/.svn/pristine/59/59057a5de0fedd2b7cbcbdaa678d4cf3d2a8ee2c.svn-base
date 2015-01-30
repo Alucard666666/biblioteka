@@ -1,0 +1,47 @@
+<?php
+
+class Transactions extends \Phalcon\Mvc\Model
+{
+
+    /**
+     *
+     * @var integer
+     */
+    public $transaction_id;
+
+    /**
+     *
+     * @var integer
+     */
+    public $transaction_user_id;
+
+    /**
+     *
+     * @var integer
+     */
+    public $transaction_project_id;
+
+    /**
+     *
+     * @var float
+     */
+    public $transaction_amount;
+
+    /**
+     *
+     * @var integer
+     */
+    public $summary;
+
+    public function initialize()
+    {
+        $this->hasOne("transaction_user_id", "Users", "user_id");
+        $this->hasOne("transaction_project_id", "Projects", "project_id");
+    }
+
+    public function summary(){
+        $this->summary += $this->transaction_amount;
+
+        return $this::sum(array( "column" => "transaction_amount"));
+    }
+}

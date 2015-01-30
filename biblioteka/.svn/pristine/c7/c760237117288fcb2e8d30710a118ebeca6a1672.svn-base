@@ -1,0 +1,54 @@
+<?php
+
+use Phalcon\Mvc\Model\Resultset\Simple as Resultset;
+use Phalcon\Mvc\ModelInterface;
+
+class Projects extends Phalcon\Mvc\Model
+{
+
+
+    /**
+     *
+     * @var integer
+     */
+    public $projekt_id;
+
+    /**
+     *
+     * @var string
+     */
+    public $projekt_title;
+
+    /**
+     *
+     * @var string
+     */
+    public $projekt_description;
+
+    /**
+     *
+     * @var string
+     */
+    public $projekt_category;
+
+    /**
+     *
+     * @var double
+     */
+    public $projekt_price;
+
+    /**
+     *
+     * @var integer
+     */
+    public $projekt_time;
+
+    /**
+     *
+     * @var string
+     */
+    public $projekt_link;
+
+
+
+}
